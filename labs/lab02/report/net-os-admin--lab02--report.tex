@@ -1,0 +1,821 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12pt,
+  a4paper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{indentfirst}
+\usepackage{float}
+\floatplacement{figure}{H}
+\IfFileExists{plex-otf.sty}{
+  %% Full TeXlive
+  \usepackage[
+    % math,
+    RM={Scale=0.94},SS={Scale=0.94},SScon={Scale=0.94},TT={Scale=MatchLowercase,FakeStretch=0.9},
+    DefaultFeatures={Ligatures=Common}
+  ]{plex-otf}
+  % \usepackage[Scale=MatchUppercase]{juliamono}
+}{
+  %% TinyTeX
+  \usepackage{libertine}
+}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Содержание}
+\else
+  \newcommand\contentsname{Содержание}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Список иллюстраций}
+\else
+  \newcommand\listfigurename{Список иллюстраций}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Список таблиц}
+\else
+  \newcommand\listtablename{Список таблиц}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Рисунок}
+\else
+  \newcommand\figurename{Рисунок}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Таблица}
+\else
+  \newcommand\tablename{Таблица}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Список}
+\newcommand*\listoflistings{\listof{codelisting}{Листинги}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{russian}
+\babelprovide[import]{english}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\usepackage[style=gost-numeric,backend=biber,langhook=extras,autolang=other*]{biblatex}
+\addbibresource{bib/cite.bib}
+\usepackage{csquotes}
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Отчёт по лабораторной работе №2},
+  pdfauthor={Пакавира Арсениу Висенте Луиш},
+  pdflang={ru-RU},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Отчёт по лабораторной работе №2}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Дисциплина: Администрирование сетевых подсистем}
+\author{Пакавира Арсениу Висенте Луиш}
+\date{}
+
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Содержание}
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\listoffigures
+\listoftables
+
+\setstretch{1.5}
+\chapter{Цель
+работы}\label{ux446ux435ux43bux44c-ux440ux430ux431ux43eux442ux44b}
+
+Здесь приводится формулировка цели лабораторной работы. Формулировки
+цели для каждой лабораторной работы приведены в методических указаниях.
+
+Цель данного шаблона --- максимально упростить подготовку отчётов по
+лабораторным работам. Модифицируя данный шаблон, студенты смогут без
+труда подготовить отчёт по лабораторным работам, а также познакомиться с
+основными возможностями разметки Markdown.
+
+\chapter{Выполнение лабораторной
+работы}\label{ux432ux44bux43fux43eux43bux43dux435ux43dux438ux435-ux43bux430ux431ux43eux440ux430ux442ux43eux440ux43dux43eux439-ux440ux430ux431ux43eux442ux44b}
+
+\section{Установка
+DNS-сервера}\label{ux443ux441ux442ux430ux43dux43eux432ux43aux430-dns-ux441ux435ux440ux432ux435ux440ux430}
+
+На виртуальной машине server выполнен вход под пользователем bahis и
+переход в режим суперпользователя с помощью команды \texttt{sudo\ -i},
+что подтверждается сменой приглашения командной строки на root
+(рис.~\ref{fig-1}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/1.png}
+
+}
+
+\caption{\label{fig-1}Переход в режим суперпользователя sudo -i}
+
+\end{figure}%
+
+В режиме суперпользователя установлены пакеты \texttt{bind} и
+\texttt{bind-utils} с использованием
+\texttt{dnf\ -y\ install\ bind\ bind-utils}; транзакция завершена
+успешно, зависимости разрешены, пакеты установлены (рис.~\ref{fig-2}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/2.png}
+
+}
+
+\caption{\label{fig-2}Установка пакетов bind и bind-utils через dnf}
+
+\end{figure}%
+
+С помощью утилиты \texttt{dig} выполнен DNS-запрос к имени
+\href{http://www.yandex.ru}{www.yandex.ru}; в выводе отображены
+заголовок ответа (opcode: QUERY, status: NOERROR), флаги (qr, rd, ra),
+секции QUESTION и ANSWER с тремя A-записями и временем отклика, что
+подтверждает корректное разрешение имени через внешний DNS-сервер
+(рис.~\ref{fig-3}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/3.png}
+
+}
+
+\caption{\label{fig-3}Результат запроса dig www.yandex.ru}
+
+\end{figure}%
+
+\section{Конфигурирование кэширующего
+DNS-сервера}\label{ux43aux43eux43dux444ux438ux433ux443ux440ux438ux440ux43eux432ux430ux43dux438ux435-ux43aux44dux448ux438ux440ux443ux44eux449ux435ux433ux43e-dns-ux441ux435ux440ux432ux435ux440ux430}
+
+Проанализировано содержимое файла \texttt{/etc/resolv.conf}: указан
+поисковый домен bahis.net и заданы внешние DNS-серверы (172.249.0.7,
+8.8.8.8, 8.8.4.4), что определяет порядок разрешения имён до изменения
+конфигурации (рис.~\ref{fig-4}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/4.png}
+
+}
+
+\caption{\label{fig-4}Содержимое файла /etc/resolv.conf}
+
+\end{figure}%
+
+Проанализирован файл \texttt{/etc/named.conf}: сервер настроен как
+кэширующий (recursion yes), прослушивает порт 53 только на 127.0.0.1,
+разрешены запросы от localhost, определены параметры каталогов и
+подключены стандартные зоны (рис.~\ref{fig-5}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/5.png}
+
+}
+
+\caption{\label{fig-5}Конфигурация файла /etc/named.conf}
+
+\end{figure}%
+
+Рассмотрено содержимое файлов \texttt{/var/named/named.ca},
+\texttt{/var/named/named.localhost} и
+\texttt{/var/named/named.loopback}: первый содержит список корневых
+DNS-серверов (NS, A, AAAA-записи), второй и третий определяют локальные
+зоны localhost и обратного разрешения 127.0.0.1 (рис.~\ref{fig-6},
+рис.~\ref{fig-7}, рис.~\ref{fig-8}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/6.png}
+
+}
+
+\caption{\label{fig-6}Содержимое файла named.ca (корневые серверы)}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/7.png}
+
+}
+
+\caption{\label{fig-7}Содержимое файла named.localhost}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/8.png}
+
+}
+
+\caption{\label{fig-8}Содержимое файла named.loopback}
+
+\end{figure}%
+
+DNS-сервер запущен и добавлен в автозагрузку командами
+\texttt{systemctl\ start\ named} и \texttt{systemctl\ enable\ named};
+сравнение результатов \texttt{dig\ www.yandex.ru} и
+\texttt{dig\ @127.0.0.1\ www.yandex.ru} показало отсутствие ответа от
+локального сервера до изменения настроек прослушивания
+(рис.~\ref{fig-9}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/9.png}
+
+}
+
+\caption{\label{fig-9}Проверка работы named и сравнение запросов dig}
+
+\end{figure}%
+
+В NetworkManager изменены параметры соединений eth0 и System eth0:
+удалены автоматические DNS, включено игнорирование auto-DNS и установлен
+сервер 127.0.0.1; после перезапуска NetworkManager файл
+\texttt{/etc/resolv.conf} содержит nameserver 127.0.0.1
+(рис.~\ref{fig-10}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/10.png}
+
+}
+
+\caption{\label{fig-10}Настройка DNS через nmcli и проверка resolv.conf}
+
+\end{figure}%
+
+В файл \texttt{/etc/named.conf} внесены изменения: добавлено
+прослушивание на всех интерфейсах (127.0.0.1; any;) и разрешены запросы
+от сети 192.168.0.0/16; также в межсетевом экране разрешена служба DNS
+(рис.~\ref{fig-11}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/11.png}
+
+}
+
+\caption{\label{fig-11}Изменение параметров listen-on и allow-query}
+
+\end{figure}%
+
+С помощью команды \texttt{lsof\ \textbar{}\ grep\ UDP} подтверждено, что
+процесс named прослушивает порт 53 (UDP), что свидетельствует о
+корректной работе DNS-сервера и направлении запросов через узел server
+(рис.~\ref{fig-12}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/12.png}
+
+}
+
+\caption{\label{fig-12}Проверка прослушивания порта 53 процессом named}
+
+\end{figure}%
+
+В конфигурационном файле \texttt{/etc/named.conf} в секцию
+\texttt{options} добавлены директивы
+\texttt{forwarders\ \{\ 127.0.0.1;\ \};} и \texttt{forward\ first;}, а
+также отключены параметры \texttt{dnssec-enable} и
+\texttt{dnssec-validation}, что обеспечивает перенаправление
+DNS-запросов на вышестоящий сервер и отказ от проверки DNSSEC
+(рис.~\ref{fig-13}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/13.png}
+
+}
+
+\caption{\label{fig-13}Добавление forwarders и отключение DNSSEC в
+named.conf}
+
+\end{figure}%
+
+\section{Конфигурирование первичного
+DNS-сервера}\label{ux43aux43eux43dux444ux438ux433ux443ux440ux438ux440ux43eux432ux430ux43dux438ux435-ux43fux435ux440ux432ux438ux447ux43dux43eux433ux43e-dns-ux441ux435ux440ux432ux435ux440ux430}
+
+На первом этапе выполнено копирование шаблона зон DNS
+\texttt{named.rfc1912.zones} в каталог \texttt{/etc/named} с последующим
+переименованием файла в \texttt{bahis.net}, после чего данный файл был
+подключён в конфигурации \texttt{/etc/named.conf} директивой
+\texttt{include\ "/etc/named/bahis.net";} (рис.~\ref{fig-14}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/14.png}
+
+}
+
+\caption{\label{fig-14}Копирование и подключение файла зоны bahis.net в
+named.conf}
+
+\end{figure}%
+
+Далее в файле \texttt{/etc/named/bahis.net} вместо стандартных зон
+\texttt{localhost.localdomain} и \texttt{1.0.0.127.in-addr.arpa} были
+определены собственные зоны: прямая зона \texttt{bahis.net} с файлом
+\texttt{master/fz/bahis.net} и обратная зона
+\texttt{1.168.192.in-addr.arpa} с файлом \texttt{master/rz/192.168.1}
+(рис.~\ref{fig-16}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/16.png}
+
+}
+
+\caption{\label{fig-16}Определение прямой и обратной зон в файле
+bahis.net}
+
+\end{figure}%
+
+После этого в каталоге \texttt{/var/named} созданы подкаталоги
+\texttt{master/fz} и \texttt{master/rz} для размещения файлов прямой и
+обратной зон. В каталог \texttt{master/fz} скопирован шаблон
+\texttt{named.localhost}, который был переименован в \texttt{bahis.net}
+(рис.~\ref{fig-17}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/17.png}
+
+}
+
+\caption{\label{fig-17}Создание каталогов master/fz и master/rz и
+подготовка файла прямой зоны}
+
+\end{figure}%
+
+Затем был отредактирован файл обратной зоны
+\texttt{/var/named/master/rz/192.168.1}: указана директива
+\texttt{\$TTL\ 1D}, задана запись SOA с сервером
+\texttt{server.bahis.net.}, установлен серийный номер формата
+ГГГГММДДВВ, добавлена A-запись с адресом \texttt{192.168.1.1}, а также
+PTR-записи для соответствия IP-адреса имени \texttt{server.bahis.net.} и
+\texttt{ns.bahis.net.}; директива \texttt{\$ORIGIN} установлена в
+\texttt{1.168.192.in-addr.arpa.} (рис.~\ref{fig-18}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/18.png}
+
+}
+
+\caption{\label{fig-18}Настройка файла обратной DNS-зоны 192.168.1}
+
+\end{figure}%
+
+Далее выполнено восстановление контекстов безопасности SELinux для
+каталогов \texttt{/etc} и \texttt{/var/named}, проверены
+SELinux-переключатели для службы named, после чего активирован параметр
+\texttt{named\_write\_master\_zones} и сервер DNS перезапущен командой
+\texttt{systemctl\ restart\ named} (рис.~\ref{fig-20}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/20.png}
+
+}
+
+\caption{\label{fig-20}Восстановление SELinux-контекста и перезапуск
+службы named}
+
+\end{figure}%
+
+\section{Проверка работоспособности первичного
+DNS-сервера}\label{ux43fux440ux43eux432ux435ux440ux43aux430-ux440ux430ux431ux43eux442ux43eux441ux43fux43eux441ux43eux431ux43dux43eux441ux442ux438-ux43fux435ux440ux432ux438ux447ux43dux43eux433ux43e-dns-ux441ux435ux440ux432ux435ux440ux430}
+
+После перезапуска службы \texttt{named} выполнена проверка разрешения
+имени \texttt{ns.bahis.net} с помощью утилиты \texttt{dig}. В ответе
+сервера получен статус \texttt{NOERROR}, в разделе ANSWER возвращена
+A-запись \texttt{192.168.1.1}, сервером указан \texttt{127.0.0.1\#53},
+что подтверждает корректную работу локального DNS-сервера
+(рис.~\ref{fig-21}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/21.png}
+
+}
+
+\caption{\label{fig-21}Результат выполнения команды dig для
+ns.bahis.net}
+
+\end{figure}%
+
+Далее выполнена передача зоны командой \texttt{host\ -l\ bahis.net}. В
+выводе отображаются NS-запись \texttt{server.bahis.net.} и A-записи для
+\texttt{bahis.net}, \texttt{ns.bahis.net} и \texttt{server.bahis.net} с
+адресом \texttt{192.168.1.1}, что подтверждает корректную настройку
+прямой зоны (рис.~\ref{fig-22}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/22.png}
+
+}
+
+\caption{\label{fig-22}Вывод команды host -l для зоны bahis.net}
+
+\end{figure}%
+
+Командой \texttt{host\ -a\ bahis.net} выполнен расширенный запрос типа
+ANY. В разделе ANSWER присутствуют записи SOA, NS и A, что подтверждает
+корректность параметров зоны и серийного номера (\textbf{?@fig-23}).
+
+!{[}Расширенный запрос host -a для bahis.net{]}
+
+Затем выполнена проверка прямого и обратного разрешения имени. Команда
+\texttt{host\ -t\ A\ bahis.net} возвращает IP-адрес
+\texttt{192.168.1.1}. Команда \texttt{host\ -t\ PTR\ 192.168.1.1}
+возвращает PTR-записи \texttt{server.bahis.net.} и
+\texttt{ns.bahis.net.}, что подтверждает корректную настройку обратной
+зоны \texttt{1.168.192.in-addr.arpa} (\textbf{?@fig-24}).
+
+!{[}Проверка A- и PTR-записей зоны bahis.net{]} \#\# Внесение изменений
+в настройки внутреннего окружения виртуальной машины
+
+На виртуальной машине \texttt{server} выполнен переход в каталог
+\texttt{/vagrant}, после чего созданы подкаталоги
+\texttt{provision/server/dns/etc/named} и
+\texttt{provision/server/dns/var/named/master}. Далее скопированы файлы
+\texttt{/etc/named.conf}, содержимое \texttt{/etc/named/} и файлы зон из
+\texttt{/var/named/master/} в соответствующие каталоги внутри
+\texttt{/vagrant/provision/server/dns/} (рис.~\ref{fig-25}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/25.png}
+
+}
+
+\caption{\label{fig-25}Подготовка структуры каталогов и копирование
+конфигурации DNS в /vagrant}
+
+\end{figure}%
+
+Затем в каталоге \texttt{/vagrant/provision/server} создан исполняемый
+файл \texttt{dns.sh}, в который внесён скрипт автоматической установки и
+настройки DNS-сервера: установка пакетов \texttt{bind} и
+\texttt{bind-utils}, копирование конфигурационных файлов в системные
+каталоги \texttt{/etc} и \texttt{/var/named}, изменение владельца на
+\texttt{named:named}, восстановление SELinux-контекстов, настройка
+межсетевого экрана для службы \texttt{dns}, включение параметра
+\texttt{named\_write\_master\_zones}, изменение DNS-адреса соединения
+\texttt{System\ eth0} на \texttt{127.0.0.1}, перезапуск
+\texttt{NetworkManager}, а также включение и запуск службы
+\texttt{named} (рис.~\ref{fig-26}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/26.png}
+
+}
+
+\caption{\label{fig-26}Содержимое provisioning-скрипта dns.sh}
+
+\end{figure}%
+
+Для автоматического выполнения данного скрипта при загрузке виртуальной
+машины в файл \texttt{Vagrantfile} в разделе конфигурации сервера
+добавлен provision-блок типа \texttt{shell} с путём
+\texttt{provision/server/dns.sh} и параметром
+\texttt{preserve\_order:\ true}, что обеспечивает последовательное
+выполнение сценария при старте VM (рис.~\ref{fig-27}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/27.png}
+
+}
+
+\caption{\label{fig-27}Добавление provisioning-скрипта dns.sh в
+конфигурацию Vagrantfile}
+
+\end{figure}%
+
+\chapter{Выводы}\label{ux432ux44bux432ux43eux434ux44b}
+
+В ходе работы выполнена установка и настройка кэширующего и первичного
+DNS-сервера на базе BIND.
+
+Сервер успешно сконфигурирован для работы в режиме recursive caching, а
+также в режиме первичного (master) сервера для прямой зоны
+\textbf{bahis.net} и обратной зоны \textbf{1.168.192.in-addr.arpa}.
+
+Настроены A- и PTR-записи, подтверждена авторитетность сервера по флагу
+\textbf{aa} в ответах \texttt{dig}. Проверка утилитами \texttt{dig} и
+\texttt{host} показала корректное разрешение имён и обратное разрешение
+IP-адреса 192.168.1.1.
+
+Обеспечена работа DNS через внутреннюю виртуальную сеть: -- изменены
+параметры \texttt{listen-on} и \texttt{allow-query}; -- открыт сервис
+DNS в firewall; -- настроены политики SELinux; -- сервер назначен
+DNS-сервером по умолчанию (127.0.0.1).
+
+Дополнительно выполнена автоматизация конфигурации с использованием
+provisioning-скрипта \texttt{dns.sh} и интеграции в
+\texttt{Vagrantfile}, что обеспечивает воспроизводимость настройки при
+перезапуске виртуальной машины.
+
+\chapter{Контрольные
+вопросы:}\label{ux43aux43eux43dux442ux440ux43eux43bux44cux43dux44bux435-ux432ux43eux43fux440ux43eux441ux44b}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Что такое DNS? - Это система, предназначенная для преобразования
+  человекочитаемых доменных имен в IP-адреса, используемые компьютерами
+  для идентификации друг друга в сети.
+\item
+  Каково назначение кэширующего DNS-сервера? - Его задача - хранить
+  результаты предыдущих DNS-запросов в памяти. Когда клиент делает
+  запрос, кэширующий DNS проверяет свой кэш, и если он содержит
+  соответствующую информацию, сервер возвращает ее без необходимости
+  обращаться к другим DNS-серверам. Это ускоряет процесс запроса.
+\item
+  Чем отличается прямая DNS-зона от обратной? - Прямая зона преобразует
+  доменные имена в IP-адреса, обратная зона выполняет обратное:
+  преобразует IP-адреса в доменные имена.
+\item
+  В каких каталогах и файлах располагаются настройки DNS-сервера? Кратко
+  охарактеризуйте, за что они отвечают. - В Linux-системах обычно
+  используется файл /etc/named.conf для общих настроек. Зоны хранятся в
+  файлах в каталоге /var/named/, например, /var/named/example.com.zone.
+\item
+  Что указывается в файле resolv.conf? - Содержит информацию о DNS-
+  серверах, используемых системой, а также о параметрах конфигурации.
+\item
+  Какие типы записи описания ресурсов есть в DNS и для чего они
+  используются? - A (IPv4-адрес), AAAA (IPv6-адрес), CNAME (каноническое
+  имя), MX (почтовый сервер), NS (имя сервера), PTR (обратная запись),
+  SOA (начальная запись зоны), TXT (текстовая информация).
+\item
+  Для чего используется домен in-addr.arpa? - Используется для обратного
+  маппинга IP-адресов в доменные имена.
+\item
+  Для чего нужен демон named? - Это DNS-сервер, реализация BIND
+  (Berkeley Internet Name Domain).
+\item
+  В чём заключаются основные функции slave-сервера и master-сервера? -
+  Master-сервер хранит оригинальные записи зоны, slave-серверы получают
+  копии данных от master-сервера.
+\item
+  Какие параметры отвечают за время обновления зоны? - refresh, retry,
+  expire, и minimum.
+\item
+  Как обеспечить защиту зоны от скачивания и просмотра? - Это может
+  включать в себя использование TSIG (Transaction SIGnatures) для
+  аутентификации между серверами.
+\item
+  Какая запись RR применяется при создании почтовых серверов? - MX (Mail
+  Exchange).
+\item
+  Как протестировать работу сервера доменных имён? - Используйте команды
+  nslookup, dig, или host.
+\item
+  Как запустить, перезапустить или остановить какую-либо службу в
+  системе? - systemctl start\textbar stop\textbar restart .
+\item
+  Как посмотреть отладочную информацию при запуске какого-либо сервиса
+  или службы? - Используйте опции, такие как -d или -v при запуске
+  службы.
+\item
+  Где храниться отладочная информация по работе системы и служб? Как её
+  посмотреть? - В системных журналах, доступных через journalctl.
+\item
+  Как посмотреть, какие файлы использует в своей работе тот или иной
+  процесс? Приведите несколько примеров. - lsof -p или fuser -v .
+\item
+  Приведите несколько примеров по изменению сетевого соединения при
+  помощи командного интерфейса nmcli. - Примеры включают nmcli
+  connection up\textbar down .
+\item
+  Что такое SELinux? - Это мандатный контроль доступа для ядра Linux.
+\item
+  Что такое контекст (метка) SELinux? - Метка, определяющая, какие
+  ресурсы могут быть доступны процессу или объекту.
+\item
+  Как восстановить контекст SELinux после внесения изменений в
+  конфигурационные файлы? - restorecon -Rv .
+\item
+  Как создать разрешающие правила политики SELinux из файлов журналов,
+  содержащих сообщения о запрете операций? - Используйте audit2allow.
+\item
+  Что такое булевый переключатель в SELinux? - Это параметр, который
+  включает или отключает определенные аспекты защиты SELinux.
+\item
+  Как посмотреть список переключателей SELinux и их состояние? -
+  getsebool -a.
+\item
+  Как изменить значение переключателя SELinux? - setsebool -P
+  \textless on\textbar off\textgreater.
+\end{enumerate}
+
+\chapter{Список
+литературы}\label{ux441ux43fux438ux441ux43eux43a-ux43bux438ux442ux435ux440ux430ux442ux443ux440ux44b}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Barr D. \emph{Common DNS Operational and Configuration Errors}: RFC /
+  RFC Editor. --- 02/1996. --- DOI: 10.17487/rfc1912.
+\item
+  McAllister M., Radvan S., Walsh D., Grift D., Paris E., Morris J.\\
+  \emph{Security-Enhanced Linux. Linux с улучшенной безопасностью:
+  руководство пользователя}. ---\\
+  URL:
+  https://docs-old.fedoraproject.org/ru-RU/Fedora/13/html/Security-Enhanced\_Linux/index.html\\
+  (дата обращения: 13.09.2021).
+\item
+  \emph{Systemd}. --- 2015. ---\\
+  URL: https://wiki.archlinux.org/index.php/Systemd\\
+  (visited on 09/13/2021).
+\item
+  Костромин В. А. \emph{Утилита lsof --- инструмент администратора}.
+  ---\\
+  URL: http://rus-linux.net/kos.php?name=/papers/lsof/lsof.html\\
+  (дата обращения: 13.09.2021).
+\item
+  Поттеринг Л. \emph{Systemd для администраторов: цикл статей}. ---
+  2010. ---\\
+  URL: http://wiki.opennet.ru/Systemd\\
+  (дата обращения: 13.09.2021).
+\item
+  \emph{Сайт проекта NetworkManager}. ---\\
+  URL: https://wiki.gnome.org/Projects/NetworkManager\\
+  (visited on 09/13/2021).
+\item
+  \emph{Сайт проекта nmcli}. ---\\
+  URL: https://developer.gnome.org/NetworkManager/stable/nmcli.html\\
+  (visited on 09/13/2021).
+\end{enumerate}
+
+
+\printbibliography
+
+
+
+\end{document}
