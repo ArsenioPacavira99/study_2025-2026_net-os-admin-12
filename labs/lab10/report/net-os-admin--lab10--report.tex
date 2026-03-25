@@ -1,0 +1,725 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12pt,
+  a4paper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{indentfirst}
+\usepackage{float}
+\floatplacement{figure}{H}
+\IfFileExists{plex-otf.sty}{
+  %% Full TeXlive
+  \usepackage[
+    % math,
+    RM={Scale=0.94},SS={Scale=0.94},SScon={Scale=0.94},TT={Scale=MatchLowercase,FakeStretch=0.9},
+    DefaultFeatures={Ligatures=Common}
+  ]{plex-otf}
+  % \usepackage[Scale=MatchUppercase]{juliamono}
+}{
+  %% TinyTeX
+  \usepackage{libertine}
+}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Содержание}
+\else
+  \newcommand\contentsname{Содержание}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Список иллюстраций}
+\else
+  \newcommand\listfigurename{Список иллюстраций}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Список таблиц}
+\else
+  \newcommand\listtablename{Список таблиц}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Рисунок}
+\else
+  \newcommand\figurename{Рисунок}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Таблица}
+\else
+  \newcommand\tablename{Таблица}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Список}
+\newcommand*\listoflistings{\listof{codelisting}{Листинги}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{russian}
+\babelprovide[import]{english}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\usepackage[style=gost-numeric,backend=biber,langhook=extras,autolang=other*]{biblatex}
+\addbibresource{bib/cite.bib}
+\usepackage{csquotes}
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Отчёт по лабораторной работе №10},
+  pdfauthor={Пакавира Арсениу Висенте Луиш},
+  pdflang={ru-RU},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Отчёт по лабораторной работе №10}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Дисциплина: Администрирование сетевых подсистем}
+\author{Пакавира Арсениу Висенте Луиш}
+\date{}
+
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Содержание}
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\listoffigures
+\listoftables
+
+\setstretch{1.5}
+\chapter{Цель
+работы}\label{ux446ux435ux43bux44c-ux440ux430ux431ux43eux442ux44b}
+
+Приобретение практических навыков по конфигурированию SMTP-сервера в
+части настройки аутентификации.
+
+\chapter{Выполнение лабораторной
+работы}\label{ux432ux44bux43fux43eux43bux43dux435ux43dux438ux435-ux43bux430ux431ux43eux440ux430ux442ux43eux440ux43dux43eux439-ux440ux430ux431ux43eux442ux44b}
+
+\section{Настройка LMTP в
+Dovecote}\label{ux43dux430ux441ux442ux440ux43eux439ux43aux430-lmtp-ux432-dovecote}
+
+Вход в систему выполнен под пользователем с последующим переходом в
+режим суперпользователя с помощью команды \texttt{sudo\ -i}, что
+подтверждается приглашением \texttt{root@server} (\textbf{?@fig-1}). Это
+обеспечивает права для изменения конфигурации почтовых служб.
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/1.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab10/report/image/1.png}{рис.1}
+
+В дополнительном терминале запущен мониторинг журнала почтовой службы
+командой \texttt{tail\ -f\ /var/log/maillog}, что позволяет в реальном
+времени отслеживать события Postfix и Dovecot, включая запуск демонов и
+обработку соединений (\textbf{?@fig-1}).
+
+В конфигурационном файле \texttt{/etc/dovecot/dovecot.conf} в список
+обслуживаемых протоколов добавлен протокол LMTP посредством строки
+\texttt{protocols\ =\ imap\ pop3\ lmtp}, что расширяет функциональность
+Dovecot для работы с LMTP (\textbf{?@fig-2}).
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/2.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab10/report/image/2.png}{рис.2}
+
+В файле \texttt{/etc/dovecot/conf.d/10-master.conf} выполнена настройка
+сервиса \texttt{lmtp}, где определён unix-сокет
+\texttt{/var/spool/postfix/private/dovecot-lmtp} с параметрами доступа
+\texttt{user\ =\ postfix}, \texttt{group\ =\ postfix},
+\texttt{mode\ =\ 0600}, обеспечивающими взаимодействие Dovecot с Postfix
+через локальный сокет (\textbf{?@fig-3}).
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/3.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab10/report/image/3.png}{рис.3}
+
+В конфигурации Postfix параметр \texttt{mailbox\_transport}
+переопределён командой
+\texttt{postconf\ -e\ \textquotesingle{}mailbox\_transport\ =\ lmtp:unix:private/dovecot-lmtp\textquotesingle{}},
+что направляет доставку почты через unix-сокет Dovecot вместо прямой
+локальной доставки (\textbf{?@fig-4}).
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/4.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab10/report/image/4.png}{рис.41}
+
+В файле \texttt{/etc/dovecot/conf.d/10-auth.conf} установлен формат
+имени пользователя \texttt{auth\_username\_format\ =\ \%Ln}, что
+обеспечивает аутентификацию по логину без доменной части
+(рис.~\ref{fig-5}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/5.png}
+
+}
+
+\caption{\label{fig-5}Настройка формата имени пользователя в Dovecot}
+
+\end{figure}%
+
+После внесения изменений выполнен перезапуск служб \texttt{postfix} и
+\texttt{dovecot} командами \texttt{systemctl\ restart\ postfix} и
+\texttt{systemctl\ restart\ dovecot}, что активирует обновлённые
+параметры конфигурации (рис.~\ref{fig-6}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/6.png}
+
+}
+
+\caption{\label{fig-6}Перезапуск служб Postfix и Dovecot}
+
+\end{figure}%
+
+С клиента отправлено тестовое письмо командой
+\texttt{echo\ .\textbar{}\ mail\ -s\ "LMTP\ test"\ bahis@bahis.net}, что
+инициирует передачу сообщения через SMTP на сервер (рис.~\ref{fig-8}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/8.png}
+
+}
+
+\caption{\label{fig-8}Отправка тестового письма с клиента}
+
+\end{figure}%
+
+На сервере выполнена проверка почтового ящика пользователя с
+использованием переменной \texttt{MAIL=\textasciitilde{}/Maildir/} и
+команды \texttt{mail}. В списке сообщений отображается письмо с темой
+«LMTP test», что подтверждает корректную доставку через LMTP в каталог
+Maildir (рис.~\ref{fig-9}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/9.png}
+
+}
+
+\caption{\label{fig-9}Просмотр содержимого Maildir и подтверждение
+доставки письма}
+
+\end{figure}%
+
+\section{Настройка
+SMTP-аутентификации}\label{ux43dux430ux441ux442ux440ux43eux439ux43aux430-smtp-ux430ux443ux442ux435ux43dux442ux438ux444ux438ux43aux430ux446ux438ux438}
+
+В файле \texttt{/etc/dovecot/conf.d/10-master.conf} определена служба
+аутентификации \texttt{service\ auth}, в которой задан unix-сокет
+\texttt{/var/spool/postfix/private/auth} с параметрами
+\texttt{user\ =\ postfix}, \texttt{group\ =\ postfix},
+\texttt{mode\ =\ 0660}. Это обеспечивает доступ Postfix к механизму
+SASL-аутентификации Dovecot через локальный сокет. Дополнительно
+определён \texttt{unix\_listener\ auth-userdb} с правами
+\texttt{mode\ =\ 0600} и пользователем \texttt{dovecot}, что
+ограничивает доступ к базе пользователей процессом Dovecot
+(рис.~\ref{fig-10}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/10.png}
+
+}
+
+\caption{\label{fig-10}Определение службы аутентификации service auth в
+Dovecot}
+
+\end{figure}%
+
+В Postfix задан тип SASL-аутентификации \texttt{dovecot} и путь к
+unix-сокету \texttt{private/auth} с помощью параметров
+\texttt{smtpd\_sasl\_type} и \texttt{smtpd\_sasl\_path}. Это настраивает
+smtpd на использование Dovecot как backend-аутентификатора
+(рис.~\ref{fig-11}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/11.png}
+
+}
+
+\caption{\label{fig-11}Настройка smtpd\_sasl\_type и smtpd\_sasl\_path в
+Postfix}
+
+\end{figure}%
+
+Параметр \texttt{smtpd\_recipient\_restrictions} настроен с
+последовательностью: \texttt{reject\_unknown\_recipient\_domain} ---
+отклонение писем для неизвестных доменов; \texttt{permit\_mynetworks}
+--- разрешение для доверенной сети;
+\texttt{reject\_non\_fqdn\_recipient} --- запрет некорректных адресов;
+\texttt{reject\_unauth\_destination} --- запрет релея для неразрешённых
+направлений; \texttt{reject\_unverified\_recipient} --- проверка
+существования получателя; \texttt{permit} --- окончательное разрешение
+при выполнении условий. Это предотвращает использование сервера как SMTP
+relay (рис.~\ref{fig-11}).
+
+В параметре \texttt{mynetworks} установлено значение
+\texttt{127.0.0.0/8}, что ограничивает приём почты только локальными
+соединениями (рис.~\ref{fig-11}).
+
+В файле \texttt{/etc/postfix/master.cf} для сервиса \texttt{smtp}
+добавлены параметры \texttt{-o\ smtpd\_sasl\_auth\_enable=yes} и
+модифицированы ограничения получателей, что временно включает
+аутентификацию на порту 25 для тестирования (рис.~\ref{fig-12}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/12.png}
+
+}
+
+\caption{\label{fig-12}Модификация сервиса smtp в master.cf для
+включения SASL}
+
+\end{figure}%
+
+После внесения изменений выполнен перезапуск служб \texttt{postfix} и
+\texttt{dovecot}, что активирует новую конфигурацию аутентификации
+(рис.~\ref{fig-13}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/13.png}
+
+}
+
+\caption{\label{fig-13}Перезапуск служб Postfix и Dovecot}
+
+\end{figure}%
+
+На клиенте установлен пакет \texttt{telnet} с использованием
+\texttt{dnf}, что позволяет выполнить ручное тестирование
+SMTP-соединения (рис.~\ref{fig-14}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/14.png}
+
+}
+
+\caption{\label{fig-14}Установка telnet на клиенте}
+
+\end{figure}%
+
+Сформирована строка аутентификации в формате base64 командой
+\texttt{printf\ \textquotesingle{}bahis\textbackslash{}x00bahis\textbackslash{}x00123456\textquotesingle{}\ \textbar{}\ base64},
+затем выполнено подключение к SMTP-серверу по порту 25. После команды
+\texttt{EHLO\ test} сервер объявил поддержку \texttt{AUTH\ PLAIN}.
+Команда \texttt{AUTH\ PLAIN\ \textless{}base64\textgreater{}}
+завершилась ответом \texttt{235\ 2.7.0\ Authentication\ successful}, что
+подтверждает корректную работу SASL-аутентификации через Dovecot
+(рис.~\ref{fig-15}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/15.png}
+
+}
+
+\caption{\label{fig-15}Тестирование SMTP-аутентификации через telnet}
+
+\end{figure}%
+
+\section{Настройка SMTP over
+TLS}\label{ux43dux430ux441ux442ux440ux43eux439ux43aux430-smtp-over-tls}
+
+На сервере выполнено копирование временного сертификата и закрытого
+ключа Dovecot из каталога \texttt{/etc/pki/dovecot} в соответствующие
+подкаталоги \texttt{/etc/pki/tls/certs} и \texttt{/etc/pki/tls/private},
+после чего в Postfix заданы параметры \texttt{smtpd\_tls\_cert\_file},
+\texttt{smtpd\_tls\_key\_file},
+\texttt{smtpd\_tls\_session\_cache\_database}, а также уровни
+безопасности \texttt{smtpd\_tls\_security\_level\ =\ may} и
+\texttt{smtp\_tls\_security\_level\ =\ may}, что активирует поддержку
+TLS для входящих и исходящих SMTP-соединений (рис.~\ref{fig-16}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/16.png}
+
+}
+
+\caption{\label{fig-16}Настройка TLS-параметров в Postfix}
+
+\end{figure}%
+
+В файле \texttt{/etc/postfix/master.cf} оставлен стандартный сервис
+\texttt{smtp}, а также добавлен сервис \texttt{submission} на порту 587
+с параметрами \texttt{-o\ smtpd\_tls\_security\_level=encrypt},
+\texttt{-o\ smtpd\_sasl\_auth\_enable=yes} и ограничениями получателей,
+что обеспечивает обязательное использование TLS и аутентификации для
+клиентов (рис.~\ref{fig-18}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/18.png}
+
+}
+
+\caption{\label{fig-18}Добавление сервиса submission в master.cf}
+
+\end{figure}%
+
+В межсетевом экране разрешена служба \texttt{smtp-submission} командами
+\texttt{firewall-cmd\ -\/-add-service=smtp-submission} и с сохранением
+правила \texttt{-\/-permanent}, после чего выполнена перезагрузка
+конфигурации брандмауэра и перезапуск Postfix (рис.~\ref{fig-19}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/19.png}
+
+}
+
+\caption{\label{fig-19}Настройка firewall и перезапуск Postfix}
+
+\end{figure}%
+
+С клиента выполнено подключение к серверу по порту 587 с использованием
+\texttt{openssl\ s\_client\ -starttls\ smtp\ -crlf\ -connect\ server.bahis.net:587}.
+В процессе установлено TLS-соединение, отображена информация о
+самоподписанном сертификате, после чего сервер успешно принял команды
+\texttt{EHLO} и объявил поддержку \texttt{AUTH\ PLAIN}
+(рис.~\ref{fig-20}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/20.png}
+
+}
+
+\caption{\label{fig-20}Установление SMTP over TLS соединения через
+openssl}
+
+\end{figure}%
+
+Проверка аутентификации выполнена командой
+\texttt{AUTH\ PLAIN\ \textless{}base64\textgreater{}}, сервер вернул
+ответ \texttt{235\ 2.7.0\ Authentication\ successful}, что подтверждает
+корректную работу SMTP over TLS с SASL-аутентификацией
+(рис.~\ref{fig-21}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/21.png}
+
+}
+
+\caption{\label{fig-21}Успешная SMTP-аутентификация через порт 587}
+
+\end{figure}%
+
+В почтовом клиенте Evolution настроен SMTP-сервер с использованием порта
+587, режима STARTTLS и обычного пароля, после чего отправлено тестовое
+сообщение с темой «test 5» (рис.~\ref{fig-22}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/22.png}
+
+}
+
+\caption{\label{fig-22}Отправка письма через Evolution по SMTP over TLS}
+
+\end{figure}%
+
+На сервере выполнена проверка почтового ящика командой
+\texttt{MAIL=\textasciitilde{}/Maildir/\ mail}, где отображается
+сообщение с темой «test 5», что подтверждает корректную доставку письма
+через защищённое соединение SMTP over TLS (рис.~\ref{fig-23}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/23.png}
+
+}
+
+\caption{\label{fig-23}Подтверждение доставки письма в Maildir}
+
+\end{figure}%
+
+\section{Внесение изменений в настройки
+внутреннего}\label{ux432ux43dux435ux441ux435ux43dux438ux435-ux438ux437ux43cux435ux43dux435ux43dux438ux439-ux432-ux43dux430ux441ux442ux440ux43eux439ux43aux438-ux432ux43dux443ux442ux440ux435ux43dux43dux435ux433ux43e}
+
+На виртуальной машине \textbf{server} выполнен переход в каталог
+\texttt{/vagrant/provision/server}, после чего конфигурационные файлы
+\texttt{dovecot.conf}, \texttt{10-master.conf}, \texttt{10-auth.conf}, а
+также \texttt{master.cf} Postfix скопированы в соответствующие
+подкаталоги \texttt{mail/etc/dovecot/} и \texttt{mail/etc/postfix/}. Это
+обеспечивает сохранение рабочей конфигурации служб для последующего
+автоматического развёртывания через provisioning (рис.~\ref{fig-24}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/24.png}
+
+}
+
+\caption{\label{fig-24}Копирование конфигурационных файлов Dovecot и
+Postfix в каталог provision}
+
+\end{figure}%
+
+В файл \texttt{/vagrant/provision/server/mail.sh} внесены изменения
+расширенной конфигурации SMTP-сервера: добавлена установка пакетов
+\texttt{postfix}, \texttt{dovecot}, \texttt{telnet}; копирование
+конфигурации в \texttt{/etc}; настройка firewall для служб
+\texttt{smtp}, \texttt{pop3}, \texttt{pop3s}, \texttt{imap},
+\texttt{imaps}, \texttt{smtp-submission}; параметры Postfix
+(\texttt{mydomain}, \texttt{myorigin}, \texttt{inet\_protocols},
+\texttt{inet\_interfaces}, \texttt{mydestination}); поддержка Maildir
+(\texttt{home\_mailbox\ =\ Maildir/}); SASL-аутентификация через Dovecot
+(\texttt{smtpd\_sasl\_type}, \texttt{smtpd\_sasl\_path}); ограничения
+\texttt{smtpd\_recipient\_restrictions}; параметр \texttt{mynetworks}; а
+также конфигурация SMTP over TLS с указанием сертификата, ключа и уровня
+безопасности. В конце скрипта выполняются
+\texttt{postfix\ set-permissions}, \texttt{restorecon}, перезапуск служб
+Postfix и Dovecot (рис.~\ref{fig-25}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/25.png}
+
+}
+
+\caption{\label{fig-25}Расширенная конфигурация SMTP-сервера в mail.sh
+(server)}
+
+\end{figure}%
+
+В файл \texttt{/vagrant/provision/client/mail.sh} добавлена установка
+пакета \texttt{telnet} командой \texttt{dnf\ -y\ install\ telnet}, что
+обеспечивает возможность тестирования SMTP-соединения с клиента в
+процессе автоматической настройки виртуальной машины
+(рис.~\ref{fig-26}).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/26.png}
+
+}
+
+\caption{\label{fig-26}Добавление установки telnet в mail.sh (client)}
+
+\end{figure}%
+
+\chapter{Выводы}\label{ux432ux44bux432ux43eux434ux44b}
+
+В ходе работы выполнена комплексная настройка почтового сервера на базе
+Postfix и Dovecot с поддержкой LMTP, SASL-аутентификации и SMTP over
+TLS.
+
+Реализована доставка почты через LMTP-сокет Dovecot, что обеспечило
+корректную интеграцию MTA и MDA. Настроена SASL-аутентификация через
+Dovecot, исключающая несанкционированное использование сервера в
+качестве SMTP-relay. Ограничения \texttt{smtpd\_recipient\_restrictions}
+и параметр \texttt{mynetworks} обеспечили контроль приёма сообщений.
+
+Настроена поддержка TLS с использованием сертификата Dovecot и
+реализован сервис submission (порт 587) с обязательным шифрованием и
+аутентификацией. Проверка через \texttt{openssl} и \texttt{AUTH\ PLAIN}
+подтвердила успешное установление защищённого соединения.
+
+Отправка сообщений через telnet и почтовый клиент Evolution показала
+корректную работу SMTP over TLS и доставку писем в Maildir пользователя.
+
+Конфигурация интегрирована в механизм provisioning виртуальной машины,
+что обеспечивает воспроизводимость настройки внутреннего окружения.
+
+\chapter{Контрольные
+вопросы}\label{ux43aux43eux43dux442ux440ux43eux43bux44cux43dux44bux435-ux432ux43eux43fux440ux43eux441ux44b}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Приведите пример задания формата аутентификации пользователя в Dovecot
+  в форме логина с указанием домена.
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{auth\_username\_format\ =\ \%Lu@\%d}
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Какие функции выполняет почтовый Relay-сервер?
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Почтовый Relay-сервер выполняет функции пересылки почты от одного
+  почтового сервера к другому, облегчая маршрутизацию электронных
+  сообщений между различными почтовыми системами.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Какие угрозы безопасности могут возникнуть в случае настройки
+  почтового сервера как Relay-сервера?
+\end{enumerate}
+
+Угрозы безопасности, связанные с настройкой почтового сервера как
+Relay-сервера, могут включать рассылку нежелательной почты (спам),
+перехват и изменение электронных сообщений, а также использование
+сервера для ретрансляции вредоносных сообщений.
+
+
+\printbibliography
+
+
+
+\end{document}

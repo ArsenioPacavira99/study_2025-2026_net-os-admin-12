@@ -32,6 +32,7 @@ license: "CC BY"
 На сервере выполнена установка пакета `fail2ban` с использованием менеджера пакетов `dnf`. В процессе установки также автоматически установлены зависимости: `fail2ban-firewalld`, `fail2ban-selinux`, `fail2ban-sendmail`, `fail2ban-server`. Установка выполнена из репозитория `epel` ([рис. @fig-1]).
 
 ![Установка пакета fail2ban и зависимостей через dnf](image/1.png){#fig-1 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/1.png)
 
 
 
@@ -40,7 +41,7 @@ license: "CC BY"
 После установки выполнен запуск службы `fail2ban` командой `systemctl start fail2ban`, затем служба добавлена в автозагрузку командой `systemctl enable fail2ban`. Создана символическая ссылка в каталоге `multi-user.target.wants`, что подтверждает корректную регистрацию службы в системе ([рис. @fig-2]).
 
 ![Запуск службы fail2ban и включение автозагрузки](image/2.png){#fig-2 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/2.png)
 
 
 ### Контроль журнала событий Fail2ban
@@ -48,7 +49,7 @@ license: "CC BY"
 В дополнительном терминале выполнен мониторинг журнала `/var/log/fail2ban.log` с помощью команды `tail -f`. В журнале зафиксирован запуск сервера Fail2ban версии 1.1.0, инициализация observer и создание новой базы данных `fail2ban.sqlite3` ([рис. @fig-3]).
 
 ![Просмотр журнала fail2ban.log в реальном времени](image/3.png){#fig-3 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/3.png)
 
 
 ### Создание файла локальной конфигурации
@@ -56,7 +57,7 @@ license: "CC BY"
 Создан файл локальной конфигурации `/etc/fail2ban/jail.d/customisation.local` с использованием команды `touch`, после чего выполнено его редактирование в текстовом редакторе `nano` ([рис. @fig-5]).
 
 ![Создание и перезапуск службы после настройки](image/5.png){#fig-5 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/5.png)
 
 ### Настройка параметров блокирования и защиты SSH
 
@@ -68,20 +69,21 @@ license: "CC BY"
 * Для всех перечисленных служб установлен параметр `enabled = true` ([рис. @fig-4]).
 
 ![Конфигурация customisation.local с параметрами bantime и SSH](image/4.png){#fig-4 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/4.png)
 
 ### Перезапуск службы Fail2ban
 
 После внесения изменений выполнен перезапуск службы командой `systemctl restart fail2ban`, что обеспечивает применение новой конфигурации ([рис. @fig-5]).
 
 ![Создание и перезапуск службы после настройки](image/5.png){#fig-5 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/5.png)
 
 ### Просмотр журнала событий Fail2ban
 
 После перезапуска службы выполнен мониторинг журнала `/var/log/fail2ban.log`. В журнале зафиксирована инициализация backend `pyinotify`, параметры `maxLines`, `maxRetry`, `findtime`, `banTime = 3600`, а также запуск jail-модулей `sshd`, `selinux-ssh`, `sshd-ddos` ([рис. @fig-6]).
 
 ![Журнал запуска jail-модулей SSH в fail2ban](image/6.png){#fig-6 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/6.png)
 
 
 ### Включение защиты HTTP
@@ -91,7 +93,7 @@ license: "CC BY"
 Для каждого модуля установлен параметр `enabled = true` ([рис. @fig-7]).
 
 ![Конфигурация HTTP jail-модулей в customisation.local](image/7.png){#fig-7 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/7.png)
 
 
 ### Перезапуск Fail2ban после настройки HTTP
@@ -99,6 +101,7 @@ license: "CC BY"
 После внесения изменений выполнен перезапуск службы `systemctl restart fail2ban`, что обеспечило загрузку новых jail-настроек ([рис. @fig-8]).
 
 ![Журнал запуска HTTP jail-модулей](image/8.png){#fig-8 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/8.png)
 
 
 
@@ -107,7 +110,7 @@ license: "CC BY"
 В журнале `/var/log/fail2ban.log` зафиксирован запуск jail-модулей `apache-auth`, `apache-badbots`, `apache-noscript`, `apache-overflows`, `apache-nohome`, `apache-botsearch`, `apache-fakegooglebot`, `apache-modsecurity`, `apache-shellshock`, а также повторная активация `sshd-ddos` ([рис. @fig-8]).
 
 ![Подтверждение запуска HTTP jail-модулей в журнале](image/8.png){#fig-8 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/8.png)
 
 
 ### Включение защиты почтовых сервисов
@@ -117,21 +120,21 @@ license: "CC BY"
 Для каждого модуля установлен параметр `enabled = true` ([рис. @fig-9]).
 
 ![Конфигурация jail-модулей для почтовых сервисов](image/9.png){#fig-9 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/9.png)
 
 ### Перезапуск Fail2ban после настройки почтовых служб
 
 После добавления конфигурации выполнен перезапуск службы `fail2ban` для применения изменений ([рис. @fig-10]).
 
 ![Журнал запуска jail-модулей почтовых сервисов](image/10.png){#fig-10 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/10.png)
 
 ### Контроль журнала после включения почтовой защиты
 
 В журнале событий зафиксирован запуск jail-модулей `postfix`, `postfix-rbl`, `dovecot`, `postfix-sasl`. Для каждого модуля отображается сообщение `Jail is in operation now`, что подтверждает успешную активацию защиты почтовых сервисов ([рис. @fig-10]).
 
 ![Подтверждение работы jail-модулей почтовых сервисов](image/10.png){#fig-10 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/10.png)
 
 ## Проверка работы Fail2ban
 
@@ -140,7 +143,7 @@ license: "CC BY"
 На сервере выполнена команда `fail2ban-client status`. В выводе отображено общее количество jail-модулей (16) и их список, включая `apache-*`, `dovecot`, `postfix`, `sshd`, `sshd-ddos`, `selinux-ssh` и другие. Это подтверждает активную работу всех ранее настроенных модулей ([рис. @fig-11]).
 
 ![Общий статус fail2ban-client](image/11.png){#fig-11 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/11.png)
 
 
 ### Просмотр статуса защиты SSH
@@ -148,6 +151,7 @@ license: "CC BY"
 Выполнена команда `fail2ban-client status sshd`. В разделе `Filter` указаны значения `Currently failed: 0`, `Total failed: 0`. В разделе `Actions` значения `Currently banned: 0`, `Total banned: 0`, список заблокированных IP-адресов отсутствует. Это подтверждает отсутствие попыток неуспешной аутентификации на момент проверки ([рис. @fig-11]).
 
 ![Статус jail-модуля sshd до проверки](image/11.png){#fig-11 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/11.png)
 
 
 
@@ -156,6 +160,7 @@ license: "CC BY"
 Выполнена команда `fail2ban-client set sshd maxretry 2`, устанавливающая параметр `maxretry = 2` для jail-модуля `sshd`. После двух неудачных попыток входа IP-адрес клиента должен быть заблокирован ([рис. @fig-11]).
 
 ![Установка параметра maxretry для sshd](image/11.png){#fig-11 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/11.png)
 
 
 
@@ -167,6 +172,7 @@ license: "CC BY"
 На сервере повторно выполнена команда `fail2ban-client status sshd`. В разделе `Actions` указано `Currently banned: 1`, `Total banned: 1`, а в списке `Banned IP list` отображён адрес клиента `192.168.1.30`. Это подтверждает успешную блокировку IP-адреса после превышения установленного порога ошибок ([рис. @fig-13]).
 
 ![Блокировка IP-адреса клиента в sshd](image/13.png){#fig-13 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/13.png)
 
 
 ### Разблокировка IP-адреса клиента
@@ -174,6 +180,7 @@ license: "CC BY"
 Выполнена команда `fail2ban-client set sshd unbanip 192.168.1.30`, снимающая блокировку с IP-адреса клиента ([рис. @fig-14]).
 
 ![Команда разблокировки IP-адреса клиента](image/14.png){#fig-14 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/14.png)
 
 
 ### Проверка снятия блокировки
@@ -181,6 +188,7 @@ license: "CC BY"
 Повторно выполнена команда `fail2ban-client status sshd`. В разделе `Actions` указано `Currently banned: 0`, список заблокированных IP-адресов пуст. Это подтверждает успешное снятие блокировки клиента ([рис. @fig-15]).
 
 ![Статус sshd после снятия блокировки](image/15.png){#fig-15 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/15.png)
 
 ### Добавление игнорирования IP-адреса клиента
 
@@ -189,6 +197,7 @@ license: "CC BY"
 Параметр `ignoreip` исключает указанный адрес из процедуры блокировки независимо от количества ошибок аутентификации ([рис. @fig-16]).
 
 ![Добавление параметра ignoreip в customisation.local](image/16.png){#fig-16 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/16.png)
 
 
 
@@ -199,6 +208,7 @@ license: "CC BY"
 что подтверждает корректную обработку параметра `ignoreip` и исключение клиента из механизма блокировки ([рис. @fig-19]).
 
 ![Сообщения журнала о игнорировании IP-адреса](image/19.png){#fig-19 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/19.png)
 
 
 
@@ -210,6 +220,7 @@ license: "CC BY"
 `Currently banned: 0`, `Total banned: 0`, список `Banned IP list` пуст, что подтверждает отсутствие блокировки благодаря параметру `ignoreip` ([рис. @fig-18]).
 
 ![Статус sshd после включения ignoreip](image/18.png){#fig-18 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/18.png)
 
 ##  Внесение изменений в настройки внутреннего
 
@@ -218,7 +229,7 @@ license: "CC BY"
 На виртуальной машине `server` выполнен переход в каталог `/vagrant/provision/server`. Создан каталог `protect/etc/fail2ban/jail.d`, после чего файл `customisation.local` скопирован из системного каталога `/etc/fail2ban/jail.d/` во внутреннюю структуру provision. Это обеспечивает перенос текущей конфигурации Fail2ban в среду автоматической настройки Vagrant ([рис. @fig-20]).
 
 ![Создание каталога protect и копирование customisation.local](image/20.png){#fig-20 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/20.png)
 
 
 ### Создание и настройка скрипта protect.sh
@@ -233,7 +244,7 @@ license: "CC BY"
 Скрипт предназначен для автоматической настройки защиты при развертывании виртуальной машины ([рис. @fig-21]).
 
 ![Содержимое скрипта protect.sh](image/21.png){#fig-21 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab16/report/image/21.png)
 
 
 ### Добавление provision-конфигурации в Vagrantfile

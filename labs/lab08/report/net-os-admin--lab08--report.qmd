@@ -30,37 +30,42 @@ license: "CC BY"
 На виртуальной машине `server` выполнен вход в терминал и переход в режим суперпользователя с использованием команды `sudo -i`, что подтверждается приглашением командной строки `root@server.bahis.net` ([рис. @fig-1]).
 
 ![Переход в режим суперпользователя на сервере](image/1.png){#fig-1 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/1.png)
 
 ## Установка пакетов Postfix и s-nail
 
 С использованием менеджера пакетов `dnf` установлены необходимые для работы почтовой подсистемы пакеты `postfix` и `s-nail`. В выводе отображается успешное разрешение зависимостей, загрузка и установка пакетов без ошибок ([рис. @fig-2]).
 
 ![Установка пакетов postfix и s-nail с помощью dnf](image/2.png){#fig-2 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/2.png)
 
 ## Настройка межсетевого экрана для службы SMTP
 
 С помощью утилиты `firewall-cmd` разрешена работа службы `smtp` в текущей и постоянной конфигурации межсетевого экрана. Команда `--list-services` подтверждает наличие службы `smtp` в списке разрешённых сервисов ([рис. @fig-3]).
 
 ![Разрешение службы SMTP в firewalld](image/3.png){#fig-3 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/3.png)
 
 ## Восстановление контекста безопасности SELinux
 
 Выполнена команда `restorecon -vR /etc` для восстановления корректных контекстов безопасности SELinux в каталоге `/etc`. В выводе отображается изменение контекста для сетевого конфигурационного файла ([рис. @fig-3]).
 
 ![Восстановление контекста безопасности SELinux](image/3.png){#fig-3 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/3.png)
 
 ## Запуск и активация службы Postfix
 
 Служба `postfix` добавлена в автозагрузку с помощью `systemctl enable postfix` и запущена командой `systemctl start postfix`. Проверка состояния через `systemctl status postfix` показывает, что служба активна и находится в состоянии `active (running)` ([рис. @fig-4]).
 
 ![Статус службы Postfix после запуска](image/4.png){#fig-4 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/4.png)
 
 ## Просмотр текущих параметров Postfix
 
 С помощью команды `postconf` выведен полный список текущих параметров конфигурации Postfix. В выводе отображаются активные значения переменных, включая параметры проверки адресов и транспортов ([рис. @fig-5]).
 
 ![Вывод команды postconf — список текущих параметров](image/5.png){#fig-5 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/5.png)
 
 ## Проверка параметров myorigin и mydomain
 
@@ -71,6 +76,7 @@ license: "CC BY"
 Команда `postconf -n` отобразила параметры, отличающиеся от значений по умолчанию, включая `myorigin = $mydomain` ([рис. @fig-6]).
 
 ![Изменение параметра myorigin и проверка конфигурации](image/6.png){#fig-6 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/6.png)
 
 ## Жёсткая установка домена и отключение IPv6
 
@@ -83,7 +89,7 @@ license: "CC BY"
 После внесения изменений выполнены команды `postfix check` и `systemctl reload postfix` для проверки и применения новой конфигурации ([рис. @fig-7]).
 
 ![Настройка параметров mydomain и inet\_protocols](image/7.png){#fig-7 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/7.png)
 
 ### 1. Отправка тестового сообщения с сервера
 
@@ -102,15 +108,17 @@ license: "CC BY"
 Дополнительно проверено содержимое каталога `/var/spool/mail`, где обнаружен файл пользователя `bahis` с полученным письмом ([рис. @fig-10]).
 
 ![Мониторинг maillog при локальной отправке](image/9.png){#fig-9 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/9.png)
 
 ## Установка Postfix и s-nail на клиенте
 
 На виртуальной машине `client` выполнена установка пакетов `postfix` и `s-nail` с использованием `dnf`. Установка завершена успешно ([рис. @fig-11], [рис. @fig-12]).
 
 ![Установка postfix на клиенте](image/11.png){#fig-11 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/11.png)
 
 ![Установка s-nail на клиенте](image/12.png){#fig-12 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/12.png)
 
 ## Настройка протоколов и запуск Postfix на клиенте
 
@@ -118,6 +126,7 @@ license: "CC BY"
 Служба Postfix добавлена в автозагрузку и запущена ([рис. @fig-13]).
 
 ![Настройка inet\_protocols и запуск Postfix на клиенте](image/13.png){#fig-13 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/13.png)
 
 ## Повторная отправка письма с клиента
 
@@ -125,7 +134,7 @@ license: "CC BY"
 `echo . | mail -s test2 bahis@server.bahis.net` ([рис. @fig-14]).
 
 ![Отправка письма test2 с клиента](image/14.png){#fig-14 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/14.png)
 
 ## Проверка сетевых параметров на сервере
 
@@ -137,7 +146,7 @@ license: "CC BY"
 Это означает, что сервер принимал соединения только с локального интерфейса ([рис. @fig-15]).
 
 ![Просмотр параметров inet\_interfaces и mynetworks](image/15.png){#fig-15 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/15.png)
 
 ## Разрешение сетевых соединений
 
@@ -149,7 +158,7 @@ license: "CC BY"
 После этого выполнены `postfix check`, `systemctl reload postfix`, `systemctl stop postfix`, `systemctl start postfix` для применения изменений ([рис. @fig-15]).
 
 ![Изменение параметров сети Postfix](image/15.png){#fig-15 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/15.png)
 
 ## Повторная отправка письма после изменения конфигурации
 
@@ -162,6 +171,7 @@ license: "CC BY"
 
 
 ![Запись в журнале о доставке письма с клиента](image/18.png){#fig-18 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/18.png)
 
 ## Настройка прямой DNS-зоны с MX-записью
 
@@ -172,6 +182,7 @@ license: "CC BY"
 Также задана A-запись для узла `mail` с адресом `192.168.1.1`. Это обеспечивает маршрутизацию почты для домена `bahis.net` через почтовый сервер `mail.bahis.net` ([рис. @fig-19]).
 
 ![Файл прямой DNS-зоны с MX-записью](image/19.png){#fig-19 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/19.png)
 
 ## Настройка обратной DNS-зоны
 
@@ -186,6 +197,7 @@ license: "CC BY"
 Это обеспечивает корректное обратное разрешение имени почтового сервера ([рис. @fig-20]).
 
 ![Файл обратной DNS-зоны с PTR-записями](image/20.png){#fig-20 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/20.png)
 
 ## Добавление домена в параметры mydestination
 
@@ -196,6 +208,7 @@ license: "CC BY"
 После этого выполнены команды `postfix check` и `systemctl reload postfix` для проверки и применения конфигурации. Также восстановлены контексты SELinux и перезапущена служба DNS `named`. Очередь отправки принудительно обработана командой `postqueue -f` ([рис. @fig-21]).
 
 ![Настройка mydestination и перезапуск служб](image/21.png){#fig-21 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/21.png)
 
 ## Отправка письма на доменный адрес с клиента
 
@@ -212,6 +225,7 @@ license: "CC BY"
 Это подтверждает успешную доставку сообщения в почтовый ящик пользователя на сервере после настройки MX-записи и параметра `mydestination` ([рис. @fig-23]).
 
 ![Журнал Postfix с подтверждением доставки](image/23.png){#fig-23 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/23.png)
 
 ## Копирование конфигурации DNS в каталог provision сервера
 
@@ -219,6 +233,7 @@ license: "CC BY"
 `/vagrant/provision/server/dns/var/named` и произведено копирование текущих файлов DNS из `/var/named` в каталог provision. В процессе подтверждена перезапись существующих файлов зоны ([рис. @fig-24]).
 
 ![Копирование файлов DNS в каталог provision](image/24.png){#fig-24 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/24.png)
 
 ## Создание скрипта mail.sh на сервере
 
@@ -235,7 +250,7 @@ license: "CC BY"
 Скрипт полностью соответствует конфигурации домена `bahis.net` ([рис. @fig-25]).
 
 ![Содержимое mail.sh на сервере](image/25.png){#fig-25 width=70%}
-
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/25.png)
 
 ## Создание скрипта mail.sh на клиенте
 
@@ -280,6 +295,7 @@ client.vm.provision "client mail",
 Таким образом, при запуске виртуальной машины клиента автоматически выполняется настройка почтовой подсистемы ([рис. @fig-29]).
 
 ![Добавление provisioning для клиента в Vagrantfile](image/29.png){#fig-29 width=70%}
+[Нажмите здесь, чтобы открыть ссылку.](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab08/report/image/29.png)
 
 # Выводы
 

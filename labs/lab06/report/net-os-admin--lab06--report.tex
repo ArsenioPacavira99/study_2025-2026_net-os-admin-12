@@ -1,0 +1,672 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12pt,
+  a4paper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{indentfirst}
+\usepackage{float}
+\floatplacement{figure}{H}
+\IfFileExists{plex-otf.sty}{
+  %% Full TeXlive
+  \usepackage[
+    % math,
+    RM={Scale=0.94},SS={Scale=0.94},SScon={Scale=0.94},TT={Scale=MatchLowercase,FakeStretch=0.9},
+    DefaultFeatures={Ligatures=Common}
+  ]{plex-otf}
+  % \usepackage[Scale=MatchUppercase]{juliamono}
+}{
+  %% TinyTeX
+  \usepackage{libertine}
+}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Содержание}
+\else
+  \newcommand\contentsname{Содержание}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Список иллюстраций}
+\else
+  \newcommand\listfigurename{Список иллюстраций}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Список таблиц}
+\else
+  \newcommand\listtablename{Список таблиц}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Рисунок}
+\else
+  \newcommand\figurename{Рисунок}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Таблица}
+\else
+  \newcommand\tablename{Таблица}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Список}
+\newcommand*\listoflistings{\listof{codelisting}{Листинги}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{russian}
+\babelprovide[import]{english}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\usepackage[style=gost-numeric,backend=biber,langhook=extras,autolang=other*]{biblatex}
+\addbibresource{bib/cite.bib}
+\usepackage{csquotes}
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Отчёт по лабораторной работе №6},
+  pdfauthor={Пакавира Арсениу Висенте Луиш},
+  pdflang={ru-RU},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Отчёт по лабораторной работе №6}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Дисциплина: Администрирование сетевых подсистем}
+\author{Пакавира Арсениу Висенте Луиш}
+\date{}
+
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Содержание}
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\listoffigures
+\listoftables
+
+\setstretch{1.5}
+\chapter{Цель
+работы}\label{ux446ux435ux43bux44c-ux440ux430ux431ux43eux442ux44b}
+
+Приобретение практических навыков по установке и конфигурированию
+системы управления базами данных на примере программного обеспечения
+MariaDB.
+
+\chapter{Выполнение лабораторной
+работы}\label{ux432ux44bux43fux43eux43bux43dux435ux43dux438ux435-ux43bux430ux431ux43eux440ux430ux442ux43eux440ux43dux43eux439-ux440ux430ux431ux43eux442ux44b}
+
+\section{Установка
+MariaDB}\label{ux443ux441ux442ux430ux43dux43eux432ux43aux430-mariadb}
+
+На виртуальной машине \texttt{server} выполнен переход в режим
+суперпользователя и произведена установка пакетов \texttt{mariadb} и
+\texttt{mariadb-server} с использованием менеджера пакетов \texttt{dnf}
+(\textbf{?@fig-1}). В процессе установки были автоматически подключены
+зависимости и выполнена загрузка необходимых компонентов.
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/1.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/1.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+После установки выполнен запуск службы \texttt{mariadb} и добавление её
+в автозагрузку с помощью \texttt{systemctl\ start\ mariadb} и
+\texttt{systemctl\ enable\ mariadb} (\textbf{?@fig-2}). Созданы
+символические ссылки в каталогах systemd, что подтверждает успешную
+регистрацию службы.
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/2.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/2.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+Далее проверено, что процесс \texttt{mariadb} прослушивает порт 3306, с
+использованием команды \texttt{ss\ -tulpen\ \textbar{}\ grep\ 3306}
+(\textbf{?@fig-2}). В выводе отображён процесс \texttt{mariadb},
+находящийся в состоянии LISTEN на порту 3306, что подтверждает
+корректный запуск сервера базы данных.
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/2.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/2.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+Выполнен скрипт первичной настройки безопасности
+\texttt{mysql\_secure\_installation}. В ходе диалога включена
+аутентификация через \texttt{unix\_socket}, установлен пароль для
+пользователя \texttt{root} СУБД, удалены анонимные пользователи
+(\textbf{?@fig-3}), запрещён удалённый доступ для root и удалена
+тестовая база данных. После применения изменений произведена
+перезагрузка таблиц привилегий. (\textbf{?@fig-3-1})
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/3.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/3.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/3-1.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/3-1.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+После завершения настройки выполнен вход в систему управления базами
+данных от имени администратора с помощью \texttt{mysql\ -u\ root\ -p}
+(\textbf{?@fig-4}). Отображена информация о версии сервера MariaDB и
+параметрах подключения.
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/4.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/4.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+В интерактивной оболочке MariaDB выполнена команда для просмотра списка
+доступных клиентских команд (\textbf{?@fig-5}). В выводе представлен
+перечень управляющих команд консольного клиента.
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/5.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/5.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+С использованием SQL-запроса \texttt{SHOW\ DATABASES;} получен список
+доступных системных баз данных (\textbf{?@fig-6}). В системе
+присутствуют базы данных: \texttt{information\_schema}, \texttt{mysql},
+\texttt{performance\_schema}.
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/6.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/6.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+\section{Конфигурация кодировки
+символов}\label{ux43aux43eux43dux444ux438ux433ux443ux440ux430ux446ux438ux44f-ux43aux43eux434ux438ux440ux43eux432ux43aux438-ux441ux438ux43cux432ux43eux43bux43eux432}
+
+Выполнен вход в MariaDB от имени администратора базы данных с
+использованием команды \texttt{mysql\ -u\ root\ -p}. После
+аутентификации выведена информация о версии сервера и установленном
+соединении (\textbf{?@fig-7}).
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/7.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/7.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+Из интерактивной оболочки выполнена команда \texttt{status}, которая
+отобразила текущее состояние сервера (\textbf{?@fig-7}). В выводе
+указаны: идентификатор соединения (Connection id), текущий пользователь
+(root@localhost), способ подключения (Localhost via UNIX socket), версия
+сервера (10.5.29-MariaDB), а также параметры кодировки. До изменения
+конфигурации значения \texttt{Server\ characterset} и
+\texttt{Db\ characterset} установлены в \texttt{latin1}, а
+\texttt{Client\ characterset} и \texttt{Conn.\ characterset} --- в
+\texttt{utf8}.
+
+Далее в каталоге \texttt{/etc/my.cnf.d} создан файл \texttt{utf8.cnf} и
+открыт для редактирования (\textbf{?@fig-8}).
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/8.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/8.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+В файл добавлена конфигурация:
+
+\begin{verbatim}
+[client]
+default-character-set = utf8
+[mysqld]
+character-set-server = utf8
+\end{verbatim}
+
+Данные параметры задают кодировку \texttt{utf8} по умолчанию для
+клиентских подключений и для сервера MariaDB (\textbf{?@fig-9}).
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/9.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/9.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+После внесения изменений выполнен перезапуск службы MariaDB командой
+\texttt{systemctl\ restart\ mariadb}, затем произведён повторный вход в
+систему и выполнена команда \texttt{status} (\textbf{?@fig-10}).
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/10.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/10.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+В результате изменения конфигурации параметры
+\texttt{Server\ characterset} и \texttt{Db\ characterset} изменились с
+\texttt{latin1} на \texttt{utf8}. Параметры
+\texttt{Client\ characterset} и \texttt{Conn.\ characterset} также
+установлены в \texttt{utf8}. Это подтверждает корректное применение
+новой конфигурации кодировки после перезапуска сервера.
+
+\section{Создание базы
+данных}\label{ux441ux43eux437ux434ux430ux43dux438ux435-ux431ux430ux437ux44b-ux434ux430ux43dux43dux44bux445}
+
+Выполнен вход в MariaDB под пользователем \texttt{root} с использованием
+команды \texttt{mysql\ -u\ root\ -p} (\textbf{?@fig-11}). После
+аутентификации отображена информация о версии сервера и установленном
+соединении.
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/11.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/11.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+Создана база данных \texttt{addressbook} с кодировкой \texttt{utf8} и
+сопоставлением \texttt{utf8\_general\_ci}, затем выполнен переход к ней
+и проверено отсутствие таблиц командой \texttt{SHOW\ TABLES;}
+(\textbf{?@fig-12}). База данных успешно создана, на момент проверки
+таблицы отсутствуют.
+
+Создана таблица \texttt{city} с полями \texttt{name} и \texttt{city}
+типа \texttt{VARCHAR(40)}. В таблицу добавлены записи: Иванов ---
+Москва, Петров --- Сочи, Сидоров --- Дубна.
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/12.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/12.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+Выполнен запрос \texttt{SELECT\ *\ FROM\ city;} (\textbf{?@fig-13}).
+Результат запроса отображает три строки, соответствующие введённым
+данным, что подтверждает корректность создания таблицы и вставки
+записей.
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/13.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/13.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+Создан пользователь \texttt{user@\textquotesingle{}\%\textquotesingle{}}
+с паролем и предоставлены права \texttt{SELECT}, \texttt{INSERT},
+\texttt{UPDATE}, \texttt{DELETE} на базу данных \texttt{addressbook}.
+После выполнения \texttt{FLUSH\ PRIVILEGES;} изменения прав вступили в
+силу. Командой \texttt{DESCRIBE\ city;} получена структура таблицы
+(\textbf{?@fig-14}). Таблица содержит два поля: \texttt{name} и
+\texttt{city}, оба типа \texttt{VARCHAR(40)}, допускающие значение
+\texttt{NULL}.
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/14.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/14.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+После выхода из MariaDB выполнена проверка списка баз данных с помощью
+\texttt{mysqlshow\ -u\ root\ -p}, а также просмотр таблиц базы
+\texttt{addressbook} под пользователями \texttt{root} и \texttt{bahis}
+(\textbf{?@fig-15}). В списке присутствует база \texttt{addressbook}, а
+в её составе отображается таблица \texttt{city}, что подтверждает
+корректность создания базы данных и настройки прав доступа.
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/15.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/15.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+\section{Резервные
+копии}\label{ux440ux435ux437ux435ux440ux432ux43dux44bux435-ux43aux43eux43fux438ux438}
+
+На виртуальной машине \texttt{server} создан каталог для хранения
+резервных копий с использованием команды \texttt{mkdir\ -p\ /var/backup}
+(\textbf{?@fig-16}). Каталог предназначен для размещения дампов базы
+данных.
+
+Выполнено создание полной резервной копии базы данных
+\texttt{addressbook} с помощью команды
+\texttt{mysqldump\ -u\ root\ -p\ addressbook\ \textgreater{}\ /var/backup/addressbook.sql}
+(\textbf{?@fig-16}). В результате сформирован SQL-файл, содержащий
+структуру таблиц и данные базы.
+
+Создана сжатая резервная копия базы данных с использованием конвейера и
+утилиты \texttt{gzip}:
+\texttt{mysqldump\ -u\ root\ -p\ addressbook\ \textbar{}\ gzip\ \textgreater{}\ /var/backup/addressbook.sql.gz}
+(\textbf{?@fig-16}). В результате получен архивированный файл дампа.
+
+Дополнительно выполнено создание сжатой резервной копии с указанием даты
+и времени создания файла:
+\texttt{mysqldump\ -u\ root\ -p\ addressbook\ \textbar{}\ gzip\ \textgreater{}\ \$(date\ +/var/backup/addressbook.\%Y\%m\%d.\%H\%M\%S.sql.gz)}
+(\textbf{?@fig-16}). Имя файла автоматически формируется с добавлением
+временной метки.
+
+Произведено восстановление базы данных из обычной резервной копии
+командой
+\texttt{mysql\ -u\ root\ -p\ addressbook\ \textless{}\ /var/backup/addressbook.sql}
+(\textbf{?@fig-16}). Данные базы импортированы из SQL-файла.
+
+Выполнено восстановление базы данных из сжатой резервной копии с
+использованием \texttt{zcat}:
+\texttt{zcat\ /var/backup/addressbook.sql.gz\ \textbar{}\ mysql\ -u\ root\ -p\ addressbook}
+(\textbf{?@fig-16}). Архив предварительно распакован в поток вывода и
+передан в клиент \texttt{mysql}, что подтверждает корректность процедуры
+восстановления.
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/16.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/16.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+\section{Внесение изменений в настройки внутреннего окружения
+виртуальной
+машины}\label{ux432ux43dux435ux441ux435ux43dux438ux435-ux438ux437ux43cux435ux43dux435ux43dux438ux439-ux432-ux43dux430ux441ux442ux440ux43eux439ux43aux438-ux432ux43dux443ux442ux440ux435ux43dux43dux435ux433ux43e-ux43eux43aux440ux443ux436ux435ux43dux438ux44f-ux432ux438ux440ux442ux443ux430ux43bux44cux43dux43eux439-ux43cux430ux448ux438ux43dux44b}
+
+На виртуальной машине \texttt{server} выполнен переход в каталог
+\texttt{/vagrant/provision/server}. Создан каталог \texttt{mysql} со
+структурой подкаталогов \texttt{etc/my.cnf.d} и \texttt{var/backup}. В
+созданные каталоги скопированы файл конфигурации \texttt{utf8.cnf} и
+резервные копии базы данных \texttt{addressbook} (\textbf{?@fig-17}).
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/17.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/17.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+В каталоге \texttt{/vagrant/provision/server} создан исполняемый файл
+\texttt{mysql.sh}, которому назначены права на выполнение. В файл
+добавлен скрипт автоматической установки и настройки MariaDB
+(\textbf{?@fig-18}). Скрипт выполняет установку пакетов \texttt{mariadb}
+и \texttt{mariadb-server}, копирование конфигурационных файлов, создание
+каталога \texttt{/var/backup}, запуск и включение службы
+\texttt{mariadb}, выполнение \texttt{mysql\_secure\_installation} в
+неинтерактивном режиме, создание базы данных \texttt{addressbook} и
+восстановление данных из резервной копии.
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/18.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/18.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+В конфигурационный файл \texttt{Vagrantfile} добавлена секция
+провижининга для сервера, обеспечивающая автоматическое выполнение
+скрипта \texttt{mysql.sh} при запуске виртуальной машины
+(\textbf{?@fig-19}). Запись использует тип \texttt{shell}, параметр
+\texttt{preserve\_order:\ true} и путь к скрипту
+\texttt{provision/server/mysql.sh}.
+
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/19.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab06/report/image/19.png}{Нажмите
+здесь, чтобы открыть ссылку.}
+
+\chapter{Выводы}\label{ux432ux44bux432ux43eux434ux44b}
+
+В ходе работы выполнена установка и базовая настройка сервера баз данных
+MariaDB на виртуальной машине \texttt{server}. Проверена корректность
+запуска службы и прослушивания стандартного порта 3306.
+
+Произведена настройка параметров безопасности с использованием
+\texttt{mysql\_secure\_installation}: установлен пароль пользователя
+\texttt{root} СУБД, удалены анонимные пользователи, запрещён удалённый
+доступ администратора и удалена тестовая база данных.
+
+Настроена кодировка \texttt{utf8} на уровне клиента и сервера путём
+изменения конфигурационных файлов и перезапуска службы. Корректность
+применения параметров подтверждена через команду \texttt{status}.
+
+Создана база данных \texttt{addressbook}, таблица \texttt{city},
+добавлены тестовые записи и проверена их выборка SQL-запросом. Настроен
+пользователь с ограниченными правами доступа к базе данных.
+
+Освоены процедуры резервного копирования и восстановления базы данных с
+использованием \texttt{mysqldump}, включая создание сжатых архивов.
+
+Автоматизирован процесс установки и настройки MariaDB посредством
+скрипта \texttt{mysql.sh}, подключённого к механизму provisioning в
+\texttt{Vagrantfile}, что обеспечивает воспроизводимость конфигурации
+при повторном развёртывании виртуальной машины.
+
+\chapter{Ответы на контрольные
+вопросы}\label{ux43eux442ux432ux435ux442ux44b-ux43dux430-ux43aux43eux43dux442ux440ux43eux43bux44cux43dux44bux435-ux432ux43eux43fux440ux43eux441ux44b}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Какая команда отвечает за настройки безопасности в MariaDB?
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Настройки безопасности в MariaDB обычно управляются с помощью команды
+  mysql\_secure\_installation. Эта команда выполняет несколько шагов,
+  включая установку пароля для пользователя root, удаление анонимных
+  учетных записей, отключение удаленного входа для пользователя root и
+  удаление тестовых баз данных.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Как настроить MariaDB для доступа через сеть?
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Для настройки MariaDB для доступа через сеть, вы можете
+  отредактировать файл конфигурации MariaDB (обычно называемый my.cnf) и
+  убедиться, что параметр bind-address установлен на IP-адрес, доступный
+  в вашей сети. Также, убедитесь, что пользователь имеет права доступа
+  извне, например, с использованием команды GRANT.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Какая команда позволяет получить обзор доступных баз данных после
+  входа в среду оболочки MariaDB?
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  SHOW DATABASES;
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Какая команда позволяет узнать, какие таблицы доступны в базе данных?
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  SHOW TABLES;
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Какая команда позволяет узнать, какие поля доступны в таблице? -
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  DESCRIBE table\_name;
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Какая команда позволяет узнать, какие записи доступны в таблице?
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  SELECT * FROM table\_name;
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Как удалить запись из таблицы?
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  DELETE FROM table\_name WHERE condition;, где condition - условие,
+  определяющее, какие записи следует удалить.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Где расположены файлы конфигурации MariaDB? Что можно настроить с их
+  помощью?
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Файлы конфигурации MariaDB обычно располагаются в различных местах в
+  зависимости от системы, но основной файл - my.cnf. Он может быть в
+  /etc/my.cnf, /etc/mysql/my.cnf или /usr/etc/my.cnf. С помощью этих
+  файлов можно настроить различные параметры, такие как порт, пути к
+  файлам данных, параметры безопасности и другие.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
+\tightlist
+\item
+  Где располагаются файлы с базами данных MariaDB?
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Файлы с базами данных MariaDB располагаются в директории данных.
+  Обычно это /var/lib/mysql/ на Linux-системах.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{9}
+\tightlist
+\item
+  Как сделать резервную копию базы данных и затем её восстановить?
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Для создания резервной копии базы данных используйте команду
+  mysqldump. Например, mysqldump -u username -p dbname \textgreater{}
+  backup.sql. Для восстановления базы данных из резервной копии
+  используйте команду mysql -u username -p dbname \textless{}
+  backup.sql.
+\end{itemize}
+
+
+\printbibliography
+
+
+
+\end{document}

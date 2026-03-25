@@ -30,20 +30,25 @@ license: "CC BY"
 Вход в систему выполнен под пользователем с последующим переходом в режим суперпользователя с помощью команды `sudo -i`, что подтверждается приглашением `root@server` ([рис. @fig-1]). Это обеспечивает права для изменения конфигурации почтовых служб.
 
 ![Переход в режим суперпользователя и мониторинг журнала maillog](image/1.png){#fig-1 width=70%}
+[рис.1](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab10/report/image/1.png)
+
 
 В дополнительном терминале запущен мониторинг журнала почтовой службы командой `tail -f /var/log/maillog`, что позволяет в реальном времени отслеживать события Postfix и Dovecot, включая запуск демонов и обработку соединений ([рис. @fig-1]).
 
 В конфигурационном файле `/etc/dovecot/dovecot.conf` в список обслуживаемых протоколов добавлен протокол LMTP посредством строки `protocols = imap pop3 lmtp`, что расширяет функциональность Dovecot для работы с LMTP ([рис. @fig-2]).
 
 ![Добавление протокола lmtp в конфигурации Dovecot](image/2.png){#fig-2 width=70%}
+[рис.2](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab10/report/image/2.png)
 
 В файле `/etc/dovecot/conf.d/10-master.conf` выполнена настройка сервиса `lmtp`, где определён unix-сокет `/var/spool/postfix/private/dovecot-lmtp` с параметрами доступа `user = postfix`, `group = postfix`, `mode = 0600`, обеспечивающими взаимодействие Dovecot с Postfix через локальный сокет ([рис. @fig-3]).
 
 ![Настройка сервиса lmtp и unix-сокета для взаимодействия с Postfix](image/3.png){#fig-3 width=70%}
+[рис.3](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab10/report/image/3.png)
 
 В конфигурации Postfix параметр `mailbox_transport` переопределён командой `postconf -e 'mailbox_transport = lmtp:unix:private/dovecot-lmtp'`, что направляет доставку почты через unix-сокет Dovecot вместо прямой локальной доставки ([рис. @fig-4]).
 
 ![Переопределение mailbox\_transport в Postfix](image/4.png){#fig-4 width=70%}
+[рис.41](https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab10/report/image/4.png)
 
 В файле `/etc/dovecot/conf.d/10-auth.conf` установлен формат имени пользователя `auth_username_format = %Ln`, что обеспечивает аутентификацию по логину без доменной части ([рис. @fig-5]).
 

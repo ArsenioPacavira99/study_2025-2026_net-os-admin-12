@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Fedora 39) (preloaded format=xelatex 2026.3.5)  19 MAR 2026 18:33
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Fedora 39) (preloaded format=xelatex 2026.3.5)  25 MAR 2026 03:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2456,146 +2456,104 @@ LaTeX Font Info:    Font shape `TU/IBMPlexMono(0)/m/n' will be
 (Font)              scaled to size 11.28003pt on input line 212.
 LaTeX Font Info:    Font shape `TU/IBMPlexSerif(0)/b/n' will be
 (Font)              scaled to size 11.28003pt on input line 214.
-
-LaTeX Warning: Reference `fig-1' on page 6 undefined on input line 214.
-
 File: image/1.png Graphic file (type bmp)
 <image/1.png>
-
-LaTeX Warning: Reference `fig-2' on page 6 undefined on input line 231.
-
 File: image/2.png Graphic file (type bmp)
 <image/2.png>
-
-LaTeX Warning: Reference `fig-3' on page 6 undefined on input line 250.
-
 [6
 
 ]
 File: image/3.png Graphic file (type bmp)
 <image/3.png>
 
-LaTeX Warning: Reference `fig-4' on page 7 undefined on input line 270.
-
-
-Underfull \hbox (badness 1342) in paragraph at lines 267--271
+Underfull \hbox (badness 1342) in paragraph at lines 241--245
 []\TU/IBMPlexSerif(0)/m/n/12 Проанализировано содержимое файла \TU/IBMPlexMono(
 0)/m/n/12 /etc/resolv.conf\TU/IBMPlexSerif(0)/m/n/12 : указан поиско-
  []
 
 
-Underfull \hbox (badness 1237) in paragraph at lines 267--271
-\TU/IBMPlexSerif(0)/m/n/12 вый домен bahis.net и заданы внешние DNS-серверы (17
-2.249.0.7, 8.8.8.8,
+Underfull \hbox (badness 2521) in paragraph at lines 241--245
+\TU/IBMPlexSerif(0)/m/n/12 вый домен user.net и заданы внешние DNS-серверы (172
+.249.0.7, 8.8.8.8,
  []
 
 File: image/4.png Graphic file (type bmp)
 <image/4.png>
-[7]
 
-LaTeX Warning: Reference `fig-5' on page 8 undefined on input line 287.
-
-
-Underfull \hbox (badness 6412) in paragraph at lines 284--288
+Underfull \hbox (badness 6412) in paragraph at lines 250--254
 \TU/IBMPlexSerif(0)/m/n/12 запросы от localhost, определены параметры каталогов
  и подключены
  []
 
 File: image/5.png Graphic file (type bmp)
 <image/5.png>
-
-LaTeX Warning: Reference `fig-6' on page 8 undefined on input line 305.
-
-
-LaTeX Warning: Reference `fig-7' on page 8 undefined on input line 306.
-
-
-LaTeX Warning: Reference `fig-8' on page 8 undefined on input line 306.
-
-
-Overfull \hbox (43.91003pt too wide) in paragraph at lines 301--307
+[7]
+Overfull \hbox (43.91003pt too wide) in paragraph at lines 259--265
 []\TU/IBMPlexSerif(0)/m/n/12 Рассмотрено содержимое файлов \TU/IBMPlexMono(0)/m
 /n/12 /var/named/named.ca\TU/IBMPlexSerif(0)/m/n/12 , \TU/IBMPlexMono(0)/m/n/12
  /var/named/named.localhost
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 301--307
+Underfull \hbox (badness 10000) in paragraph at lines 259--265
 \TU/IBMPlexSerif(0)/m/n/12 и \TU/IBMPlexMono(0)/m/n/12 /var/named/named.loopbac
 k\TU/IBMPlexSerif(0)/m/n/12 : первый содержит список корневых DNS-
  []
 
 File: image/6.png Graphic file (type bmp)
 <image/6.png>
-[8]
 File: image/7.png Graphic file (type bmp)
 <image/7.png>
+
+Overfull \hbox (188.91351pt too wide) in paragraph at lines 270--273
+[][] \TU/IBMPlexSerif(0)/m/n/12 [рис. 7]https://github.com/ArsenioPacavira99/st
+udy_2025-
+ []
+
+[8]
 File: image/8.png Graphic file (type bmp)
 <image/8.png>
-[9]
-
-LaTeX Warning: Reference `fig-9' on page 10 undefined on input line 349.
-
 File: image/9.png Graphic file (type bmp)
 <image/9.png>
-
-LaTeX Warning: Reference `fig-10' on page 10 undefined on input line 367.
-
+[9]
 File: image/10.png Graphic file (type bmp)
 <image/10.png>
-[10]
 
-LaTeX Warning: Reference `fig-11' on page 11 undefined on input line 384.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 381--385
+Underfull \hbox (badness 10000) in paragraph at lines 299--303
 []\TU/IBMPlexSerif(0)/m/n/12 В файл \TU/IBMPlexMono(0)/m/n/12 /etc/named.conf \
 TU/IBMPlexSerif(0)/m/n/12 внесены изменения: добавлено прослушива-
  []
 
 
-Underfull \hbox (badness 1983) in paragraph at lines 381--385
+Underfull \hbox (badness 1983) in paragraph at lines 299--303
 \TU/IBMPlexSerif(0)/m/n/12 ние на всех интерфейсах (127.0.0.1; any;) и разрешен
 ы запросы от сети
  []
 
 File: image/11.png Graphic file (type bmp)
 <image/11.png>
-
-LaTeX Warning: Reference `fig-12' on page 11 undefined on input line 401.
-
+[10]
 File: image/12.png Graphic file (type bmp)
 <image/12.png>
-[11]
-
-LaTeX Warning: Reference `fig-13' on page 12 undefined on input line 421.
-
 File: image/13.png Graphic file (type bmp)
 <image/13.png>
 
-LaTeX Warning: Reference `fig-14' on page 12 undefined on input line 443.
-
-
-Overfull \hbox (24.24442pt too wide) in paragraph at lines 439--444
+Overfull \hbox (24.24442pt too wide) in paragraph at lines 332--337
 []\TU/IBMPlexSerif(0)/m/n/12 На первом этапе выполнено копирование шаблона зон 
 DNS \TU/IBMPlexMono(0)/m/n/12 named.rfc1912.zones
  []
 
 File: image/14.png Graphic file (type bmp)
 <image/14.png>
-[12]
-
-LaTeX Warning: Reference `fig-16' on page 13 undefined on input line 463.
-
-
-Overfull \hbox (45.63596pt too wide) in paragraph at lines 458--464
+[11]
+Overfull \hbox (45.63596pt too wide) in paragraph at lines 342--348
 []\TU/IBMPlexSerif(0)/m/n/12 Далее в файле \TU/IBMPlexMono(0)/m/n/12 /etc/named
 /bahis.net \TU/IBMPlexSerif(0)/m/n/12 вместо стандартных зон \TU/IBMPlexMono(0)
 /m/n/12 localhost.localdomain
  []
 
 
-Underfull \hbox (badness 4193) in paragraph at lines 458--464
+Underfull \hbox (badness 4193) in paragraph at lines 342--348
 \TU/IBMPlexMono(0)/m/n/12 bahis.net \TU/IBMPlexSerif(0)/m/n/12 с файлом \TU/IBM
 PlexMono(0)/m/n/12 master/fz/bahis.net \TU/IBMPlexSerif(0)/m/n/12 и обратная зо
 на \TU/IBMPlexMono(0)/m/n/12 1.168.192.in-
@@ -2604,35 +2562,28 @@ PlexMono(0)/m/n/12 master/fz/bahis.net \TU/IBMPlexSerif(0)/m/n/12 и обрат�
 File: image/16.png Graphic file (type bmp)
 <image/16.png>
 
-LaTeX Warning: Reference `fig-17' on page 13 undefined on input line 482.
-
-
-Underfull \hbox (badness 5985) in paragraph at lines 478--483
+Underfull \hbox (badness 5985) in paragraph at lines 353--358
 []\TU/IBMPlexSerif(0)/m/n/12 После этого в каталоге \TU/IBMPlexMono(0)/m/n/12 /
 var/named \TU/IBMPlexSerif(0)/m/n/12 созданы подкаталоги \TU/IBMPlexMono(0)/m/n
 /12 master/fz \TU/IBMPlexSerif(0)/m/n/12 и
  []
 
 
-Underfull \hbox (badness 6047) in paragraph at lines 478--483
+Underfull \hbox (badness 6047) in paragraph at lines 353--358
 \TU/IBMPlexMono(0)/m/n/12 master/rz \TU/IBMPlexSerif(0)/m/n/12 для размещения ф
 айлов прямой и обратной зон. В каталог
  []
 
 File: image/17.png Graphic file (type bmp)
 <image/17.png>
-[13]
 
-LaTeX Warning: Reference `fig-18' on page 14 undefined on input line 504.
-
-
-Overfull \hbox (28.92267pt too wide) in paragraph at lines 497--505
+Overfull \hbox (28.92267pt too wide) in paragraph at lines 363--371
 []\TU/IBMPlexSerif(0)/m/n/12 Затем был отредактирован файл обратной зоны \TU/IB
 MPlexMono(0)/m/n/12 /var/named/master/rz/192.168.1\TU/IBMPlexSerif(0)/m/n/12 :
  []
 
 
-Underfull \hbox (badness 3068) in paragraph at lines 497--505
+Underfull \hbox (badness 3068) in paragraph at lines 363--371
 \TU/IBMPlexSerif(0)/m/n/12 ни \TU/IBMPlexMono(0)/m/n/12 server.bahis.net. \TU/I
 BMPlexSerif(0)/m/n/12 и \TU/IBMPlexMono(0)/m/n/12 ns.bahis.net.\TU/IBMPlexSerif
 (0)/m/n/12 ; директива \TU/IBMPlexMono(0)/m/n/12 $ORIGIN \TU/IBMPlexSerif(0)/m/
@@ -2641,61 +2592,40 @@ n/12 установлена в
 
 File: image/18.png Graphic file (type bmp)
 <image/18.png>
-
-LaTeX Warning: Reference `fig-20' on page 14 undefined on input line 522.
-
+[12]
 File: image/20.png Graphic file (type bmp)
 <image/20.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 533--533
-[][][]|[]\TU/IBMPlexSerif(0)/m/n/12 Восстановление SELinux-контекста и перезапу
-ск службы
- []
-
-[14]
-
-LaTeX Warning: Reference `fig-21' on page 15 undefined on input line 545.
-
-
-Underfull \hbox (badness 3525) in paragraph at lines 540--546
+Underfull \hbox (badness 3525) in paragraph at lines 389--395
 \TU/IBMPlexMono(0)/m/n/12 NOERROR\TU/IBMPlexSerif(0)/m/n/12 , в разделе ANSWER 
 возвращена A-запись \TU/IBMPlexMono(0)/m/n/12 192.168.1.1\TU/IBMPlexSerif(0)/m/
 n/12 , сервером
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 540--546
+Underfull \hbox (badness 10000) in paragraph at lines 389--395
 \TU/IBMPlexSerif(0)/m/n/12 указан \TU/IBMPlexMono(0)/m/n/12 127.0.0.1#53\TU/IBM
 PlexSerif(0)/m/n/12 , что подтверждает корректную работу локального
  []
 
 File: image/21.png Graphic file (type bmp)
 <image/21.png>
+[13]
 
-LaTeX Warning: Reference `fig-22' on page 15 undefined on input line 564.
-
-
-Underfull \hbox (badness 1867) in paragraph at lines 560--565
-\TU/IBMPlexSerif(0)/m/n/12 де отображаются NS-запись \TU/IBMPlexMono(0)/m/n/12 
-server.bahis.net. \TU/IBMPlexSerif(0)/m/n/12 и A-записи для \TU/IBMPlexMono(0)/
-m/n/12 bahis.net\TU/IBMPlexSerif(0)/m/n/12 ,
- []
-
-
-LaTeX Warning: File `image/22.png' not found on input line 570.
+LaTeX Warning: File `image/22.png' not found on input line 406.
 
 ! Unable to load picture or PDF file 'image/22.png'.
 <to be read again> 
                    }
-l.570 ...textheight,keepaspectratio]{image/22.png}
+l.406 ...textheight,keepaspectratio]{image/22.png}
                                                    
 Here is how much of TeX's memory you used:
- 33855 strings out of 476696
- 674089 string characters out of 5806956
+ 33822 strings out of 476696
+ 673741 string characters out of 5806956
  1928621 words of memory out of 6000000
- 53500 multiletter control sequences out of 15000+600000
+ 53467 multiletter control sequences out of 15000+600000
  516710 words of font info for 177 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 108i,7n,137p,10622b,3181s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,8n,137p,10622b,3181s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on net-os-admin--lab02--report.pdf (14 pages).
+Output written on net-os-admin--lab02--report.pdf (13 pages).

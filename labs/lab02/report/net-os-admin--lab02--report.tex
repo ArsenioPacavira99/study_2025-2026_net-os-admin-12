@@ -208,209 +208,111 @@
 \section{Установка
 DNS-сервера}\label{ux443ux441ux442ux430ux43dux43eux432ux43aux430-dns-ux441ux435ux440ux432ux435ux440ux430}
 
-На виртуальной машине server выполнен вход под пользователем bahis и
+На виртуальной машине server выполнен вход под пользователем user и
 переход в режим суперпользователя с помощью команды \texttt{sudo\ -i},
 что подтверждается сменой приглашения командной строки на root
-(рис.~\ref{fig-1}).
-
-\begin{figure}
-
-\centering{
+(\textbf{?@fig-1}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/1.png}
-
-}
-
-\caption{\label{fig-1}Переход в режим суперпользователя sudo -i}
-
-\end{figure}%
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/1.png}{рис.
+1}
 
 В режиме суперпользователя установлены пакеты \texttt{bind} и
 \texttt{bind-utils} с использованием
 \texttt{dnf\ -y\ install\ bind\ bind-utils}; транзакция завершена
-успешно, зависимости разрешены, пакеты установлены (рис.~\ref{fig-2}).
-
-\begin{figure}
-
-\centering{
+успешно, зависимости разрешены, пакеты установлены (\textbf{?@fig-2}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/2.png}
-
-}
-
-\caption{\label{fig-2}Установка пакетов bind и bind-utils через dnf}
-
-\end{figure}%
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/2.png}{рис.
+2}
 
 С помощью утилиты \texttt{dig} выполнен DNS-запрос к имени
 \href{http://www.yandex.ru}{www.yandex.ru}; в выводе отображены
 заголовок ответа (opcode: QUERY, status: NOERROR), флаги (qr, rd, ra),
 секции QUESTION и ANSWER с тремя A-записями и временем отклика, что
 подтверждает корректное разрешение имени через внешний DNS-сервер
-(рис.~\ref{fig-3}).
-
-\begin{figure}
-
-\centering{
+(\textbf{?@fig-3}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/3.png}
-
-}
-
-\caption{\label{fig-3}Результат запроса dig www.yandex.ru}
-
-\end{figure}%
-
-\section{Конфигурирование кэширующего
-DNS-сервера}\label{ux43aux43eux43dux444ux438ux433ux443ux440ux438ux440ux43eux432ux430ux43dux438ux435-ux43aux44dux448ux438ux440ux443ux44eux449ux435ux433ux43e-dns-ux441ux435ux440ux432ux435ux440ux430}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/3.png}{Нажмите
+здесь, чтобы открыть ссылку.} \#\# Конфигурирование кэширующего
+DNS-сервера
 
 Проанализировано содержимое файла \texttt{/etc/resolv.conf}: указан
-поисковый домен bahis.net и заданы внешние DNS-серверы (172.249.0.7,
+поисковый домен user.net и заданы внешние DNS-серверы (172.249.0.7,
 8.8.8.8, 8.8.4.4), что определяет порядок разрешения имён до изменения
-конфигурации (рис.~\ref{fig-4}).
-
-\begin{figure}
-
-\centering{
+конфигурации (\textbf{?@fig-4}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/4.png}
-
-}
-
-\caption{\label{fig-4}Содержимое файла /etc/resolv.conf}
-
-\end{figure}%
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/4.png}{рис.
+4}
 
 Проанализирован файл \texttt{/etc/named.conf}: сервер настроен как
 кэширующий (recursion yes), прослушивает порт 53 только на 127.0.0.1,
 разрешены запросы от localhost, определены параметры каталогов и
-подключены стандартные зоны (рис.~\ref{fig-5}).
-
-\begin{figure}
-
-\centering{
+подключены стандартные зоны (\textbf{?@fig-5}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/5.png}
-
-}
-
-\caption{\label{fig-5}Конфигурация файла /etc/named.conf}
-
-\end{figure}%
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/5.png}{рис.
+5}
 
 Рассмотрено содержимое файлов \texttt{/var/named/named.ca},
 \texttt{/var/named/named.localhost} и
 \texttt{/var/named/named.loopback}: первый содержит список корневых
 DNS-серверов (NS, A, AAAA-записи), второй и третий определяют локальные
-зоны localhost и обратного разрешения 127.0.0.1 (рис.~\ref{fig-6},
-рис.~\ref{fig-7}, рис.~\ref{fig-8}).
-
-\begin{figure}
-
-\centering{
+зоны localhost и обратного разрешения 127.0.0.1 (\textbf{?@fig-6},
+\textbf{?@fig-7}, \textbf{?@fig-8}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/6.png}
-
-}
-
-\caption{\label{fig-6}Содержимое файла named.ca (корневые серверы)}
-
-\end{figure}%
-
-\begin{figure}
-
-\centering{
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/6.png}{рис.
+6}
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/7.png}
-
-}
-
-\caption{\label{fig-7}Содержимое файла named.localhost}
-
-\end{figure}%
-
-\begin{figure}
-
-\centering{
+{[}рис.
+7{]}https://github.com/ArsenioPacavira99/study\_2025-2026\_net-os-admin-12/tree/master/labs/lab02/report/image/7.png)
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/8.png}
-
-}
-
-\caption{\label{fig-8}Содержимое файла named.loopback}
-
-\end{figure}%
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/8.png}{рис.
+8}
 
 DNS-сервер запущен и добавлен в автозагрузку командами
 \texttt{systemctl\ start\ named} и \texttt{systemctl\ enable\ named};
 сравнение результатов \texttt{dig\ www.yandex.ru} и
 \texttt{dig\ @127.0.0.1\ www.yandex.ru} показало отсутствие ответа от
 локального сервера до изменения настроек прослушивания
-(рис.~\ref{fig-9}).
-
-\begin{figure}
-
-\centering{
+(\textbf{?@fig-9}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/9.png}
-
-}
-
-\caption{\label{fig-9}Проверка работы named и сравнение запросов dig}
-
-\end{figure}%
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/9.png}{рис.
+9}
 
 В NetworkManager изменены параметры соединений eth0 и System eth0:
 удалены автоматические DNS, включено игнорирование auto-DNS и установлен
 сервер 127.0.0.1; после перезапуска NetworkManager файл
 \texttt{/etc/resolv.conf} содержит nameserver 127.0.0.1
-(рис.~\ref{fig-10}).
-
-\begin{figure}
-
-\centering{
+(\textbf{?@fig-10}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/10.png}
-
-}
-
-\caption{\label{fig-10}Настройка DNS через nmcli и проверка resolv.conf}
-
-\end{figure}%
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/10.png}{рис.
+10}
 
 В файл \texttt{/etc/named.conf} внесены изменения: добавлено
 прослушивание на всех интерфейсах (127.0.0.1; any;) и разрешены запросы
 от сети 192.168.0.0/16; также в межсетевом экране разрешена служба DNS
-(рис.~\ref{fig-11}).
-
-\begin{figure}
-
-\centering{
+(\textbf{?@fig-11}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/11.png}
-
-}
-
-\caption{\label{fig-11}Изменение параметров listen-on и allow-query}
-
-\end{figure}%
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/11.png}{рис.
+11}
 
 С помощью команды \texttt{lsof\ \textbar{}\ grep\ UDP} подтверждено, что
 процесс named прослушивает порт 53 (UDP), что свидетельствует о
 корректной работе DNS-сервера и направлении запросов через узел server
-(рис.~\ref{fig-12}).
-
-\begin{figure}
-
-\centering{
+(\textbf{?@fig-12}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/12.png}
-
-}
-
-\caption{\label{fig-12}Проверка прослушивания порта 53 процессом named}
-
-\end{figure}%
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/12.png}{рис.
+12}
 
 В конфигурационном файле \texttt{/etc/named.conf} в секцию
 \texttt{options} добавлены директивы
@@ -418,121 +320,68 @@ DNS-сервер запущен и добавлен в автозагрузку 
 также отключены параметры \texttt{dnssec-enable} и
 \texttt{dnssec-validation}, что обеспечивает перенаправление
 DNS-запросов на вышестоящий сервер и отказ от проверки DNSSEC
-(рис.~\ref{fig-13}).
-
-\begin{figure}
-
-\centering{
+(\textbf{?@fig-13}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/13.png}
-
-}
-
-\caption{\label{fig-13}Добавление forwarders и отключение DNSSEC в
-named.conf}
-
-\end{figure}%
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/13.png}{рис.
+13}
 
 \section{Конфигурирование первичного
 DNS-сервера}\label{ux43aux43eux43dux444ux438ux433ux443ux440ux438ux440ux43eux432ux430ux43dux438ux435-ux43fux435ux440ux432ux438ux447ux43dux43eux433ux43e-dns-ux441ux435ux440ux432ux435ux440ux430}
 
 На первом этапе выполнено копирование шаблона зон DNS
 \texttt{named.rfc1912.zones} в каталог \texttt{/etc/named} с последующим
-переименованием файла в \texttt{bahis.net}, после чего данный файл был
+переименованием файла в \texttt{user.net}, после чего данный файл был
 подключён в конфигурации \texttt{/etc/named.conf} директивой
-\texttt{include\ "/etc/named/bahis.net";} (рис.~\ref{fig-14}).
-
-\begin{figure}
-
-\centering{
+\texttt{include\ "/etc/named/usernet";} (\textbf{?@fig-14}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/14.png}
-
-}
-
-\caption{\label{fig-14}Копирование и подключение файла зоны bahis.net в
-named.conf}
-
-\end{figure}%
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/14.png}{рис.
+22}
 
 Далее в файле \texttt{/etc/named/bahis.net} вместо стандартных зон
 \texttt{localhost.localdomain} и \texttt{1.0.0.127.in-addr.arpa} были
 определены собственные зоны: прямая зона \texttt{bahis.net} с файлом
 \texttt{master/fz/bahis.net} и обратная зона
 \texttt{1.168.192.in-addr.arpa} с файлом \texttt{master/rz/192.168.1}
-(рис.~\ref{fig-16}).
-
-\begin{figure}
-
-\centering{
+(\textbf{?@fig-16}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/16.png}
-
-}
-
-\caption{\label{fig-16}Определение прямой и обратной зон в файле
-bahis.net}
-
-\end{figure}%
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/16.png}{рис.
+16}
 
 После этого в каталоге \texttt{/var/named} созданы подкаталоги
 \texttt{master/fz} и \texttt{master/rz} для размещения файлов прямой и
 обратной зон. В каталог \texttt{master/fz} скопирован шаблон
-\texttt{named.localhost}, который был переименован в \texttt{bahis.net}
-(рис.~\ref{fig-17}).
-
-\begin{figure}
-
-\centering{
+\texttt{named.localhost}, который был переименован в \texttt{user.net}
+(\textbf{?@fig-17}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/17.png}
-
-}
-
-\caption{\label{fig-17}Создание каталогов master/fz и master/rz и
-подготовка файла прямой зоны}
-
-\end{figure}%
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/17.png}{рис.
+17}
 
 Затем был отредактирован файл обратной зоны
 \texttt{/var/named/master/rz/192.168.1}: указана директива
 \texttt{\$TTL\ 1D}, задана запись SOA с сервером
-\texttt{server.bahis.net.}, установлен серийный номер формата
-ГГГГММДДВВ, добавлена A-запись с адресом \texttt{192.168.1.1}, а также
-PTR-записи для соответствия IP-адреса имени \texttt{server.bahis.net.} и
+\texttt{server.user.net.}, установлен серийный номер формата ГГГГММДДВВ,
+добавлена A-запись с адресом \texttt{192.168.1.1}, а также PTR-записи
+для соответствия IP-адреса имени \texttt{server.bahis.net.} и
 \texttt{ns.bahis.net.}; директива \texttt{\$ORIGIN} установлена в
-\texttt{1.168.192.in-addr.arpa.} (рис.~\ref{fig-18}).
-
-\begin{figure}
-
-\centering{
+\texttt{1.168.192.in-addr.arpa.} (\textbf{?@fig-18}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/18.png}
-
-}
-
-\caption{\label{fig-18}Настройка файла обратной DNS-зоны 192.168.1}
-
-\end{figure}%
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/18.png}{рис.
+18}
 
 Далее выполнено восстановление контекстов безопасности SELinux для
 каталогов \texttt{/etc} и \texttt{/var/named}, проверены
 SELinux-переключатели для службы named, после чего активирован параметр
 \texttt{named\_write\_master\_zones} и сервер DNS перезапущен командой
-\texttt{systemctl\ restart\ named} (рис.~\ref{fig-20}).
-
-\begin{figure}
-
-\centering{
+\texttt{systemctl\ restart\ named} (\textbf{?@fig-20}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/20.png}
-
-}
-
-\caption{\label{fig-20}Восстановление SELinux-контекста и перезапуск
-службы named}
-
-\end{figure}%
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/20.png}{рис.
+20}
 
 \section{Проверка работоспособности первичного
 DNS-сервера}\label{ux43fux440ux43eux432ux435ux440ux43aux430-ux440ux430ux431ux43eux442ux43eux441ux43fux43eux441ux43eux431ux43dux43eux441ux442ux438-ux43fux435ux440ux432ux438ux447ux43dux43eux433ux43e-dns-ux441ux435ux440ux432ux435ux440ux430}
@@ -542,40 +391,23 @@ DNS-сервера}\label{ux43fux440ux43eux432ux435ux440ux43aux430-ux440ux430ux4
 сервера получен статус \texttt{NOERROR}, в разделе ANSWER возвращена
 A-запись \texttt{192.168.1.1}, сервером указан \texttt{127.0.0.1\#53},
 что подтверждает корректную работу локального DNS-сервера
-(рис.~\ref{fig-21}).
-
-\begin{figure}
-
-\centering{
+(\textbf{?@fig-21}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/21.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/21.png}{рис.
+21}
 
-}
-
-\caption{\label{fig-21}Результат выполнения команды dig для
-ns.bahis.net}
-
-\end{figure}%
-
-Далее выполнена передача зоны командой \texttt{host\ -l\ bahis.net}. В
-выводе отображаются NS-запись \texttt{server.bahis.net.} и A-записи для
-\texttt{bahis.net}, \texttt{ns.bahis.net} и \texttt{server.bahis.net} с
+Далее выполнена передача зоны командой \texttt{host\ -l\ user.net}. В
+выводе отображаются NS-запись \texttt{server.user.net.} и A-записи для
+\texttt{user.net}, \texttt{ns.user.net} и \texttt{server.user.net} с
 адресом \texttt{192.168.1.1}, что подтверждает корректную настройку
-прямой зоны (рис.~\ref{fig-22}).
-
-\begin{figure}
-
-\centering{
+прямой зоны (\textbf{?@fig-22}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/22.png}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/22.png}{рис.
+22}
 
-}
-
-\caption{\label{fig-22}Вывод команды host -l для зоны bahis.net}
-
-\end{figure}%
-
-Командой \texttt{host\ -a\ bahis.net} выполнен расширенный запрос типа
+Командой \texttt{host\ -a\ user.net} выполнен расширенный запрос типа
 ANY. В разделе ANSWER присутствуют записи SOA, NS и A, что подтверждает
 корректность параметров зоны и серийного номера (\textbf{?@fig-23}).
 
@@ -622,19 +454,11 @@ ANY. В разделе ANSWER присутствуют записи SOA, NS и A
 \texttt{named\_write\_master\_zones}, изменение DNS-адреса соединения
 \texttt{System\ eth0} на \texttt{127.0.0.1}, перезапуск
 \texttt{NetworkManager}, а также включение и запуск службы
-\texttt{named} (рис.~\ref{fig-26}).
-
-\begin{figure}
-
-\centering{
+\texttt{named} (\textbf{?@fig-26}).
 
 \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{image/26.png}
-
-}
-
-\caption{\label{fig-26}Содержимое provisioning-скрипта dns.sh}
-
-\end{figure}%
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/26.png}{Нажмите
+здесь, чтобы открыть ссылку.}
 
 Для автоматического выполнения данного скрипта при загрузке виртуальной
 машины в файл \texttt{Vagrantfile} в разделе конфигурации сервера
@@ -656,7 +480,8 @@ ANY. В разделе ANSWER присутствуют записи SOA, NS и A
 
 \end{figure}%
 
-\chapter{Выводы}\label{ux432ux44bux432ux43eux434ux44b}
+\href{https://github.com/ArsenioPacavira99/study_2025-2026_net-os-admin-12/tree/master/labs/lab02/report/image/27.png}{Нажмите
+здесь, чтобы открыть ссылку.} \# Выводы
 
 В ходе работы выполнена установка и настройка кэширующего и первичного
 DNS-сервера на базе BIND.
